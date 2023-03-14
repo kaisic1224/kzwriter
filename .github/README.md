@@ -29,6 +29,11 @@ You can also just clone this repository directly if you do not want to track you
 git clone https://github.com/kaisic1224/astrovim-config ~/.config/nvim/lua/user
 ```
 
+#### Windows
+```shell
+git clone https://github.com/kaisic1224/astrovim-config $env:APPDATALOCAL/config/nvim/lua/user
+```
+
 #### Start Neovim
 
 ```shell
