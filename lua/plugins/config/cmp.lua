@@ -24,14 +24,6 @@ vim.opt.completeopt = "menu,menuone,noinsert"
     })
   })
 
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -65,7 +57,7 @@ vim.opt.completeopt = "menu,menuone,noinsert"
   end
 
   -- Setup rust_analyzer via rust-tools.nvim
- require("rust-tools").setup({
+require("rust-tools").setup({
 tools = {
     inlay_hints = {
       auto = true,
