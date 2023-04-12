@@ -22,7 +22,6 @@ map('n', '<S-TAB>', ':BufferLineCyclePrev<CR>')
 
 -- Nvim tree
 map('n', '<leader>a', ':NvimTreeToggle<CR>')
-map('n', '<leader>af', 'NvimTreeFocus<CR>')
 
 -- Telescope
 map('n', '<leader>F', ':Telescope find_files <CR>')
@@ -36,4 +35,3 @@ map('n', '<leader>x', '<C-w>c')
 
 
 -- Extras
-map('n', '<C-c>', ':%y+<CR>')
