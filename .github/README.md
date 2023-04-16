@@ -14,3 +14,4 @@ git clone https://github.com/kaisic1224/dotfiles $env:LOCALAPPDATA/nvim/
 ```shell
 nvim
 ```
+Credit to https://github.com/pwnwriter/pwnvim for the starting template
