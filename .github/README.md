@@ -1,3 +1,5 @@
+Neovim setup for RUST development
+
 #### Clone the repository
 
 ```shell
