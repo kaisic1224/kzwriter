@@ -82,10 +82,13 @@ lazy.setup({
                 require("plugins.config.bufferline")
         end
 },
--- icon pack for bufferline --
+-- better escape --
 {
-        'kyazdani42/nvim-web-devicons',
-        lazy = true
+        "max397574/better-escape.nvim",
+        lazy = true,
+        config = function()
+                require("plugins.config.better-escape")
+        end
 },
 
 -- Nvim tree file viewer --
