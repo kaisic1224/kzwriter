@@ -85,7 +85,7 @@ lazy.setup({
 -- better escape --
 {
         "max397574/better-escape.nvim",
-        lazy = true,
+        lazy = false,
         config = function()
                 require("plugins.config.better-escape")
         end
