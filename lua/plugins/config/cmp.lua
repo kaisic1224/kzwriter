@@ -1,5 +1,6 @@
 local cmp = require'cmp'
 local luasnip = require('luasnip')
+local lspconfig = require('lspconfig')
 vim.opt.completeopt = "menu,menuone,noinsert"
 local function has_words_before()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -17,11 +18,20 @@ cmp.setup({
                 ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                 ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
-                                cmp.mapping.select_next_item()
+                                cmp.select_next_item()
                         elseif luasnip.expand_or_jumpable() then
                                 luasnip.expand_or_jump()
                         elseif has_words_before() then
                                 cmp.complete()
+                        else
+                                fallback()
+                        end
+                end, { "i", "s" }),         
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                                cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                                luasnip.jump(-1)
                         else
                                 fallback()
                         end
@@ -68,6 +78,13 @@ local lsp_attach = function(client, buf)
         vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
         vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
 end
+
+lspconfig.tsserver.setup {
+        on_attach = on_attach,
+        filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
+        cmd = { "typescript-language-server", "--stdio"},
+        capabilities = capabilities
+}
 
 -- Setup rust_analyzer via rust-tools.nvim
 require("rust-tools").setup({
