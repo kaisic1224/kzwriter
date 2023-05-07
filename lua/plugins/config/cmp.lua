@@ -73,7 +73,6 @@ local lsp_attach = function(client, buf)
         -- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
         -- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
         -- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
-
         vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
         vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
         vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
