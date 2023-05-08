@@ -85,6 +85,17 @@ lspconfig.tsserver.setup {
         capabilities = capabilities
 }
 
+
+--lspconfig.jdtls.setup{
+  --      on_attach = on_attach,
+    --    capabilities = capabilities,
+      --  cmd={"jdtls"},
+--        root_dir = function(fname)
+  --                     return vin.fn.getcwd()
+ 
+    --    end
+--} 
+
 -- Setup rust_analyzer via rust-tools.nvim
 require("rust-tools").setup({
         tools = {
