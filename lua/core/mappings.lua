@@ -11,6 +11,8 @@ map('i', '<C-h>', '<Left>')
 map('i', '<C-j>', '<Down>')
 map('i', '<C-k>', '<Up>')
 map('i', '<C-l>', '<Right>')
+map('i', '<C-b>', '<b>')
+map('i', '<C-w>', '<w>')
 
 -- Normal mode other keys
 map('n', '<C-s>', ':w <CR>')
@@ -34,3 +36,7 @@ map('n', '<leader>x', '<C-w>c')
 
 
 -- Extras
+--map('n', "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>")
+--map('n', "<S-CR>", ":lua require'dap'.continue()<CR>")
+--map('n', "<C-bl>", ":lua require'dap'.step_over()<CR>")
+--map('n', "<C-bj>", ":lua require'dap'.step_into()<CR>")

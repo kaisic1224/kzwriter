@@ -1,14 +1,14 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then 
         print "Waittt, bootstrapping lazy.nvim ..."
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+        vim.fn.system({
+                "git",
+                "clone",
+                "--filter=blob:none",
+                "https://github.com/folke/lazy.nvim.git",
+                "--branch=stable", -- latest stable release
+                lazypath,
+        })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -17,150 +17,165 @@ if not ok then return end
 lazy.setup({
 
         -- Colorscheme --
---{
---        'rose-pine/neovim',
---        name = 'rose-pine',
---        lazy = false,
---        priority = 1000,
---        config = function()
---                vim.cmd('colorscheme rose-pine')
---        end
---},
---
-{
-        'catppuccin/nvim',
-        name = 'catppuccin',
-        lazy = false,
-        priority = 1000,
-        config = function()
-                vim.cmd('colorscheme catppuccin-mocha')
-        end
-},
+        --{
+        --        'rose-pine/neovim',
+        --        name = 'rose-pine',
+        --        lazy = false,
+        --        priority = 1000,
+        --        config = function()
+        --                vim.cmd('colorscheme rose-pine')
+        --        end
+        --},
+        --
+        {
+                'catppuccin/nvim',
+                name = 'catppuccin',
+                lazy = false,
+                priority = 1000,
+                config = function()
+                        vim.cmd('colorscheme catppuccin-mocha')
+                end
+        },
 
 
--- Autopairings --
-{ 
-        'windwp/nvim-autopairs',
-        name = 'nvim-autopairs',
-        lazy = false,
-        config = function()
-                require("nvim-autopairs").setup()
-        end
-},
--- lsp stuffs --
-{
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lua',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline',
-        'saadparwaiz1/cmp_luasnip',
-        'simrat39/rust-tools.nvim',
-        'L3MON4D3/LuaSnip',
-        'neovim/nvim-lspconfig',
-},
+        -- Autopairings --
+        { 
+                'windwp/nvim-autopairs',
+                name = 'nvim-autopairs',
+                lazy = false,
+                config = function()
+                        require("nvim-autopairs").setup()
+                end
+        },
+        -- lsp stuffs --
+        {
+                'hrsh7th/cmp-nvim-lsp',
+                'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-path',
+                'hrsh7th/cmp-cmdline',
+                'saadparwaiz1/cmp_luasnip',
+                'simrat39/rust-tools.nvim',
+                'L3MON4D3/LuaSnip',
+                'neovim/nvim-lspconfig',
+        },
 
-{
+        {
 
-        'hrsh7th/nvim-cmp',
-        config = function()
-                require("plugins.config.cmp")
-        end
+                'hrsh7th/nvim-cmp',
+                lazy = true,
+                config = function()
+                        require("plugins.config.cmp")
+                end
 
 
-},
+        },
 
--- Bufferline --
+        -- Bufferline --
 
-{
+        {
 
-        'akinsho/bufferline.nvim',
-        name = 'bufferline',
-        lazy = false,
-        priority = 1000,
-        config = function()
-                require("plugins.config.bufferline")
-        end
-},
--- better escape --
-{
-        "max397574/better-escape.nvim",
-        lazy = false,
-        config = function()
-                require("plugins.config.better-escape")
-        end
-},
+                'akinsho/bufferline.nvim',
+                name = 'bufferline',
+                lazy = false,
+                priority = 1000,
+                config = function()
+                        require("plugins.config.bufferline")
+                end
+        },
+        -- debugger --
+       -- {
+         --       'mfussenegger/nvim-dap',
+           --     lazy = false,
+             --   config = function()
+              --          require("plugins.config.dap")
+              --  end
+                
+        --},
+        {
+                'kevinhwang91/nvim-ufo',
+                'kevinhwang91/promise-async'
+        },
+        {
+                'numToStr/Comment.nvim',
+                lazy = false,
+                config = function()
+                        require("plugins.config.comment")
+                end
+        },
+        -- better escape --
+        {
+                "max397574/better-escape.nvim",
+                lazy = false,
+                config = function()
+                        require("plugins.config.better-escape")
+                end
+        },
+        {
+                "mg979/vim-visual-multi",
+                lazy = false,
+        },
 
--- Nvim tree file viewer --
+        -- Nvim tree file viewer --
 
-{
-        'nvim-tree/nvim-tree.lua',
-        name = 'nvim-tree',
-        lazy = false,
-        config = function()
-                require("plugins.config.nvim-tree")
-        end
-},
+        {
+                'nvim-tree/nvim-tree.lua',
+                name = 'nvim-tree',
+                lazy = false,
+                config = function()
+                        require("plugins.config.nvim-tree")
+                end
+        },
 
--- Telescope stuffs -- 
+        -- Telescope stuffs -- 
 
-{
-        'nvim-lua/plenary.nvim',
-        lazy = true
-},
+        {
+                'nvim-lua/plenary.nvim',
+                lazy = true
+        },
 
-{
+        {
 
-        'alvarosevilla95/telescope.nvim',
-        name = 'telescope',
-        lazy = true,
-        priotity = 1000,
-        config = function()
-                require("plugins.config.telescope")
-        end
-},
+                'alvarosevilla95/telescope.nvim',
+                name = 'telescope',
+                lazy = true,
+                priotity = 1000,
+                config = function()
+                        require("plugins.config.telescope")
+                end
+        },
 
--- Treesitter stuffs --
-{
-        'nvim-treesitter/nvim-treesitter',
-        name = 'treesitter',
-        lazy = true,
-        config = function()
-                require("plugins.config.treesitter")
-        end
-},
+        -- Treesitter stuffs --
+        {
+                'nvim-treesitter/nvim-treesitter',
+                name = 'treesitter',
+                lazy = true,
+                config = function()
+                        require("plugins.config.treesitter")
+                end
+        },
 
--- Statusline (staline) --
+        -- Statusline (staline) --
 
-{
-        'tamton-aquib/staline.nvim',
-        name = 'staline',
-        lazy = false,
-        config = function()
-                require("plugins.config.staline")
-        end
-},
+        {
+                'tamton-aquib/staline.nvim',
+                name = 'staline',
+                lazy = false,
+                config = function()
+                        require("plugins.config.staline")
+                end
+        },
 
--- Floating terminal --
-{
-        'akinsho/toggleterm.nvim',
-        name = 'toggleterm',
-        lazy = false,
-        config = function()
-                require("plugins.config.term")
-        end
-},
+        -- gitsigns stuffs --
 
--- gitsigns stuffs --
-
-{
-        'lewis6991/gitsigns.nvim',
-        name = 'gitsigns',
-        lazy = true,
-        config = function()
-                require("plugins.config.gitsigns")
-        end
-},
+        {
+                'lewis6991/gitsigns.nvim',
+                name = 'gitsigns',
+                lazy = true,
+                config = function()
+                        require("plugins.config.gitsigns")
+                end
+        },
 
 
 
@@ -173,7 +188,10 @@ lazy.setup({
                                 "getscript",
                                 "getscriptPlugin",
                                 "gzip",
+                                "health",
                                 "logipat",
+                                "man",
+                                "matchparen",
                                 "netrw",
                                 "netrwPlugin",
                                 "netrwSettings",
