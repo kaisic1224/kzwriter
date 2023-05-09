@@ -11,8 +11,6 @@ map('i', '<C-h>', '<Left>')
 map('i', '<C-j>', '<Down>')
 map('i', '<C-k>', '<Up>')
 map('i', '<C-l>', '<Right>')
-map('i', '<C-b>', '<b>')
-map('i', '<C-w>', '<w>')
 
 -- Normal mode other keys
 map('n', '<C-s>', ':w <CR>')
