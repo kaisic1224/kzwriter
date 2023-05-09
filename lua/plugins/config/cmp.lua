@@ -88,8 +88,26 @@ local lsp_attach = function(client, buf)
         vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
         vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
         vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
+        if client.server_capabilities.documentFormattingProvider then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                        group = vim.api.nvim_create_augroup("Format", { clear = true }),
+                        buffer = bufnr,
+                        callback = function() vim.lsp.buf.formatting_seq_sync() end
+                })
+        end
 end
-require('ufo').setup()
+
+require('ufo').setup({
+        preview = {
+                mappings = {
+            scrollU = '<C-u>',
+            scrollD = '<C-d>',
+            jumpTop = '[',
+            jumpBot = ']'
+        }
+        }
+}
+)
 
 
 lspconfig.tsserver.setup {

@@ -131,14 +131,14 @@ lazy.setup({
 
         {
                 'nvim-lua/plenary.nvim',
-                lazy = true
+                lazy = false
         },
 
         {
 
                 'alvarosevilla95/telescope.nvim',
                 name = 'telescope',
-                lazy = true,
+                lazy = false,
                 priotity = 1000,
                 config = function()
                         require("plugins.config.telescope")
@@ -171,12 +171,34 @@ lazy.setup({
         {
                 'lewis6991/gitsigns.nvim',
                 name = 'gitsigns',
-                lazy = true,
+                lazy = false,
                 config = function()
                         require("plugins.config.gitsigns")
                 end
         },
-
+        {
+                'jose-elias-alvarez/null-ls.nvim',
+                lazy = false,
+                config = function()
+                        require("plugins.config.null-ls")
+                end
+        },
+        {
+                'windwp/nvim-ts-autotag',
+                lazy = false,
+                config = function()
+                        local status, autotag = pcall(require, "nvim-ts-autotag")
+                        if (not status) then return end
+                        autotag.setup()
+                end
+        },
+        {
+                'MunifTanjim/prettier.nvim',
+                lazy = false,
+                config = function()
+                        require("plugins.config.prettier")
+                end
+        },
 
 
 },{ 
@@ -217,4 +239,4 @@ lazy.setup({
                 },
         },                                                                                                                                                                                                                          
 }
-)                                                                                                                                                                                                                            
+)

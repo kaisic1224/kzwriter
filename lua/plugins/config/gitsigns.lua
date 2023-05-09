@@ -1,4 +1,4 @@
-require('gitsigns').setup {
+local opts = {
   signs = {
     add          = { text = '┃' },
     change       = { text = '┃' },
@@ -40,3 +40,21 @@ require('gitsigns').setup {
     enable = false
   },
 }
+
+local has_gitsigns, gitsigns = pcall(require, "gitsigns")
+if has_gitsigns then
+  local function setup()
+    gitsigns.setup(opts)
+  end
+
+  -- Attach to the BufEnter event
+   vim.cmd([[
+    augroup lazyload_gitsigns
+      autocmd!
+      autocmd BufEnter * lua require("gitsigns").setup()
+    augroup END
+  ]]) 
+
+  end
+
+
