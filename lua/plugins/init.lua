@@ -176,29 +176,31 @@ lazy.setup({
                         require("plugins.config.gitsigns")
                 end
         },
-        {
-                'jose-elias-alvarez/null-ls.nvim',
-                lazy = false,
-                config = function()
-                        require("plugins.config.null-ls")
-                end
-        },
+        -- {
+        --         'jose-elias-alvarez/null-ls.nvim',
+        --         lazy = false,
+        --         config = function()
+        --                 require("plugins.config.null-ls")
+        --         end
+        -- },
         {
                 'windwp/nvim-ts-autotag',
-                lazy = false,
-                config = function()
-                        local status, autotag = pcall(require, "nvim-ts-autotag")
-                        if (not status) then return end
-                        autotag.setup()
-                end
+                lazy = false
         },
-        {
-                'MunifTanjim/prettier.nvim',
-                lazy = false,
-                config = function()
-                        require("plugins.config.prettier")
-                end
-        },
+        -- {
+        --         'MunifTanjim/prettier.nvim',
+        --         lazy = false,
+        --         config = function()
+        --                 require("plugins.config.prettier")
+        --         end
+        -- },
+        -- {
+        --         'nvim-tree/nvim-web-devicons',
+        --         lazy = true,
+        --         config = function()
+        --                 require("plugins.config.icons")
+        --         end
+        -- }
 
 
 },{ 

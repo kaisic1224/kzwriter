@@ -89,34 +89,37 @@ local lsp_attach = function(client, buf)
         vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
         vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
         if client.server_capabilities.documentFormattingProvider then
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                        group = vim.api.nvim_create_augroup("Format", { clear = true }),
-                        buffer = bufnr,
-                        callback = function() vim.lsp.buf.formatting_seq_sync() end
-                })
+                vim.api.nvim_command [[augroup Format]]
+                 vim.api.nvim_command [[autocmd! * <buffer>]]
+                 vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+                vim.api.nvim_command [[autogroup END]]
+       
         end
 end
 
 require('ufo').setup({
         preview = {
                 mappings = {
-            scrollU = '<C-u>',
-            scrollD = '<C-d>',
-            jumpTop = '[',
-            jumpBot = ']'
+                        scrollU = '<C-u>',
+                        scrollD = '<C-d>',
+                }
         }
-        }
-}
-)
+})
 
 
 lspconfig.tsserver.setup {
-        on_attach = on_attach,
+        on_attach = lsp_attach,
         filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
         cmd = { "typescript-language-server", "--stdio"},
         capabilities = capabilities
 }
 
+lspconfig.tailwindcss.setup {
+        on_attach = lsp_attach,
+        filetypes = {"typescript", "typescriptreact", "typescript.tsx", "css"},
+        cmd = {"tailwindcss-language-server", "--stdio"},
+        capabilities = capabilities
+}
 -- Setup rust_analyzer via rust-tools.nvim
 require("rust-tools").setup({
         tools = {

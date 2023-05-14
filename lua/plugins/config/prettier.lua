@@ -6,12 +6,12 @@ prettier.setup {
   filetypes = {
     "css",
     "javascript",
-    "javascriptreact",
     "typescript",
     "typescriptreact",
     "json",
     "scss",
-    "less"
-  }
+  },
+    tab_width = 2,
+    use_tabs = false,
 }
 

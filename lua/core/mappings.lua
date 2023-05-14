@@ -15,6 +15,8 @@ map('i', '<C-l>', '<Right>')
 -- Normal mode other keys
 map('n', '<C-s>', ':w <CR>')
 map('n', '<C-q>', ':bd!<CR>')
+map('n', '<A-j>', ':move +1 <CR>')
+map('n', '<A-k>', ':move -2 <CR>')
 
 -- Bufferline 
 map('n', '<TAB>', ':BufferLineCycleNext<CR>')
@@ -25,7 +27,6 @@ map('n', '<leader>a', ':NvimTreeToggle<CR>')
 -- Telescope
 map('n', '<leader>F', ':Telescope find_files <CR>')
 map('n', '<leader>fl', ':Telescope live_grep <CR>')
-map('n', '<leader>b', ':Telescope buffers<CR>')
 
 -- Window splitting
 map('n', '<leader>v', ':vsplit<CR>')
