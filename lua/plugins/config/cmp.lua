@@ -38,7 +38,7 @@ cmp.setup({
                 end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
+                { name = 'nvim_lsp', max_item_count = 30, keyword_length = 6, },
                 { name = "nvim_lua" },
                 { name = "luasnip" },
                 { name = "path" },
@@ -55,15 +55,6 @@ cmp.setup.cmdline(':', {
                 { name = 'cmdline' }
         })
 })
-
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
 -- Setup buffer-local keymaps / options for LSP buffers
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -90,21 +81,12 @@ local lsp_attach = function(client, buf)
         vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
         if client.server_capabilities.documentFormattingProvider then
                 vim.api.nvim_command [[augroup Format]]
-                 vim.api.nvim_command [[autocmd! * <buffer>]]
-                 vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+                vim.api.nvim_command [[autocmd! * <buffer>]]
+                vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
                 vim.api.nvim_command [[autogroup END]]
        
         end
 end
-
-require('ufo').setup({
-        preview = {
-                mappings = {
-                        scrollU = '<C-u>',
-                        scrollD = '<C-d>',
-                }
-        }
-})
 
 
 lspconfig.tsserver.setup {

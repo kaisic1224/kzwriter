@@ -84,24 +84,42 @@ lazy.setup({
                 end
         },
         -- debugger --
-       -- {
-         --       'mfussenegger/nvim-dap',
-           --     lazy = false,
-             --   config = function()
-              --          require("plugins.config.dap")
-              --  end
-                
+        -- {
+        --       'mfussenegger/nvim-dap',
+        --     lazy = false,
+        --   config = function()
+        --          require("plugins.config.dap")
+        --  end
+
         --},
         {
                 'kevinhwang91/nvim-ufo',
-                'kevinhwang91/promise-async'
+                dependencies = {
+                        'kevinhwang91/promise-async'
+                },
+                config = function() 
+                        vim.o.foldcolumn = '1' -- '0' is not bad
+                        vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+                        vim.o.foldlevelstart = 99
+                        vim.o.foldenable = true
+                        require('ufo').setup({
+                                preview = {
+                                        mappings = {
+                                                scrollU = '<C-u>',
+                                                scrollD = '<C-d>',
+                                        }
+                                }
+                        })
+                end
         },
+        -- comments
         {
                 'numToStr/Comment.nvim',
                 lazy = false,
                 config = function()
-                        require("plugins.config.comment")
+                        require('Comment').setup()
                 end
+
         },
         -- better escape --
         {
