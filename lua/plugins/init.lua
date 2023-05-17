@@ -26,7 +26,7 @@ lazy.setup({
         --                vim.cmd('colorscheme rose-pine')
         --        end
         --},
-        --
+        
         {
                 'catppuccin/nvim',
                 name = 'catppuccin',
@@ -37,7 +37,6 @@ lazy.setup({
                 end
         },
 
-
         -- Autopairings --
         { 
                 'windwp/nvim-autopairs',
@@ -47,34 +46,31 @@ lazy.setup({
                         require("nvim-autopairs").setup()
                 end
         },
+        
         -- lsp stuffs --
         {
-                'hrsh7th/cmp-nvim-lsp',
-                'hrsh7th/cmp-nvim-lua',
-                'hrsh7th/cmp-buffer',
-                'hrsh7th/cmp-path',
                 'hrsh7th/cmp-cmdline',
                 'saadparwaiz1/cmp_luasnip',
                 'simrat39/rust-tools.nvim',
                 'L3MON4D3/LuaSnip',
                 'neovim/nvim-lspconfig',
+                'hrsh7th/cmp-nvim-lsp',
+                'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-path',
+                'hrsh7th/cmp-cmdline',
+
         },
-
         {
-
                 'hrsh7th/nvim-cmp',
                 lazy = true,
+                event = "BufEnter",
                 config = function()
                         require("plugins.config.cmp")
                 end
-
-
         },
-
         -- Bufferline --
-
         {
-
                 'akinsho/bufferline.nvim',
                 name = 'bufferline',
                 lazy = false,
@@ -97,6 +93,7 @@ lazy.setup({
                 dependencies = {
                         'kevinhwang91/promise-async'
                 },
+                event = { "BufNewFile", "BufReadPre" },
                 config = function() 
                         vim.o.foldcolumn = '1' -- '0' is not bad
                         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
@@ -131,7 +128,8 @@ lazy.setup({
         },
         {
                 "mg979/vim-visual-multi",
-                lazy = false,
+                name = "visual-multi",
+                keys = { "<C-n>", desc = "visual-multi" },
         },
 
         -- Nvim tree file viewer --
@@ -139,24 +137,19 @@ lazy.setup({
         {
                 'nvim-tree/nvim-tree.lua',
                 name = 'nvim-tree',
-                lazy = false,
+                cmd = {"NvimTreeToggle", "NvimTreeFocus"},
                 config = function()
                         require("plugins.config.nvim-tree")
                 end
         },
 
         -- Telescope stuffs -- 
-
         {
-                'nvim-lua/plenary.nvim',
-                lazy = false
-        },
-
-        {
-
                 'alvarosevilla95/telescope.nvim',
+                dependencies = { 'nvim-lua/plenary.nvim' },
                 name = 'telescope',
-                lazy = false,
+                lazy = true,
+                cmd = { "Telescope" },
                 priotity = 1000,
                 config = function()
                         require("plugins.config.telescope")
@@ -167,6 +160,9 @@ lazy.setup({
         {
                 'nvim-treesitter/nvim-treesitter',
                 name = 'treesitter',
+                cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+                event = { "BufNewFile", "BufReadPre" },
+                build = ":TSUpdate",
                 lazy = true,
                 config = function()
                         require("plugins.config.treesitter")
@@ -174,7 +170,6 @@ lazy.setup({
         },
 
         -- Statusline (staline) --
-
         {
                 'tamton-aquib/staline.nvim',
                 name = 'staline',
@@ -185,11 +180,11 @@ lazy.setup({
         },
 
         -- gitsigns stuffs --
-
         {
                 'lewis6991/gitsigns.nvim',
                 name = 'gitsigns',
-                lazy = false,
+                lazy = true,
+                event = "BufEnter",
                 config = function()
                         require("plugins.config.gitsigns")
                 end
@@ -203,7 +198,12 @@ lazy.setup({
         -- },
         {
                 'windwp/nvim-ts-autotag',
-                lazy = false
+                name = "ts-autotag",
+                lazy = true,
+                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact" },
+                config = function()
+                        require('nvim-ts-autotag').setup()
+                end
         },
         -- {
         --         'MunifTanjim/prettier.nvim',

@@ -48,12 +48,7 @@ if has_gitsigns then
   end
 
   -- Attach to the BufEnter event
-   vim.cmd([[
-    augroup lazyload_gitsigns
-      autocmd!
-      autocmd BufEnter * lua require("gitsigns").setup()
-    augroup END
-  ]]) 
+
 
   end
 
