@@ -26,7 +26,7 @@ lazy.setup({
         --                vim.cmd('colorscheme rose-pine')
         --        end
         --},
-        
+
         {
                 'catppuccin/nvim',
                 name = 'catppuccin',
@@ -41,39 +41,51 @@ lazy.setup({
         { 
                 'windwp/nvim-autopairs',
                 name = 'nvim-autopairs',
-                lazy = false,
+                event = { "VeryLazy" },
                 config = function()
-                        require("nvim-autopairs").setup()
+                        require("plugins.config.autopairs") 
                 end
         },
-        
+
         -- lsp stuffs --
         {
-                'hrsh7th/cmp-cmdline',
                 'saadparwaiz1/cmp_luasnip',
-                'simrat39/rust-tools.nvim',
-                'L3MON4D3/LuaSnip',
-                'neovim/nvim-lspconfig',
                 'hrsh7th/cmp-nvim-lsp',
                 'hrsh7th/cmp-nvim-lua',
-                'hrsh7th/cmp-buffer',
                 'hrsh7th/cmp-path',
+                'hrsh7th/cmp-buffer',
                 'hrsh7th/cmp-cmdline',
-
+                'L3MON4D3/LuaSnip',
+                'simrat39/rust-tools.nvim',
         },
         {
                 'hrsh7th/nvim-cmp',
                 lazy = true,
-                event = "BufEnter",
+                event = "InsertEnter",
                 config = function()
                         require("plugins.config.cmp")
                 end
+        },
+        {
+                'neovim/nvim-lspconfig',
+                lazy = true,
+                event = { "BufReadPre", "BufNewFile" },
+                config = function()
+                        require("plugins.config.lspconfig")
+                end
+        },
+        {
+         --       name = "rust-tools",
+         --       ft = "rust",
+         --       config = function()
+         --               require("plugins.config.rust-tools")
+         --       end
         },
         -- Bufferline --
         {
                 'akinsho/bufferline.nvim',
                 name = 'bufferline',
-                lazy = false,
+                event = { "BufWinEnter" },
                 priority = 1000,
                 config = function()
                         require("plugins.config.bufferline")
@@ -112,7 +124,8 @@ lazy.setup({
         -- comments
         {
                 'numToStr/Comment.nvim',
-                lazy = false,
+                lazy = true,
+                keys = { "gcc" },
                 config = function()
                         require('Comment').setup()
                 end
@@ -121,6 +134,7 @@ lazy.setup({
         -- better escape --
         {
                 "max397574/better-escape.nvim",
+                name = "better-escape",
                 lazy = false,
                 config = function()
                         require("plugins.config.better-escape")
@@ -129,6 +143,7 @@ lazy.setup({
         {
                 "mg979/vim-visual-multi",
                 name = "visual-multi",
+                lazy = true,
                 keys = { "<C-n>", desc = "visual-multi" },
         },
 
@@ -170,21 +185,22 @@ lazy.setup({
         },
 
         -- Statusline (staline) --
-        {
-                'tamton-aquib/staline.nvim',
-                name = 'staline',
-                lazy = false,
-                config = function()
-                        require("plugins.config.staline")
-                end
-        },
+        -- {
+        --         'tamton-aquib/staline.nvim',
+        --         lazy = true,
+        --         name = 'staline',
+        --         events = { "BufWinEnter" },
+        --         config = function()
+        --                 require("plugins.config.staline")
+        --         end
+        -- },
 
         -- gitsigns stuffs --
         {
                 'lewis6991/gitsigns.nvim',
                 name = 'gitsigns',
                 lazy = true,
-                event = "BufEnter",
+                event = { "BufWritePre", "BufReadPre" },
                 config = function()
                         require("plugins.config.gitsigns")
                 end
