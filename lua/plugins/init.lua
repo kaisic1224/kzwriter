@@ -49,14 +49,10 @@ lazy.setup({
 
         -- lsp stuffs --
         {
+                'L3MON4D3/LuaSnip',
                 'saadparwaiz1/cmp_luasnip',
                 'hrsh7th/cmp-nvim-lsp',
-                'hrsh7th/cmp-nvim-lua',
-                'hrsh7th/cmp-path',
                 'hrsh7th/cmp-buffer',
-                'hrsh7th/cmp-cmdline',
-                'L3MON4D3/LuaSnip',
-                'simrat39/rust-tools.nvim',
         },
         {
                 'hrsh7th/nvim-cmp',
@@ -75,11 +71,18 @@ lazy.setup({
                 end
         },
         {
-         --       name = "rust-tools",
-         --       ft = "rust",
-         --       config = function()
-         --               require("plugins.config.rust-tools")
-         --       end
+                'simrat39/rust-tools.nvim',
+                dependencies = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim"},
+                name = "rust-tools",
+                ft = "rust",
+                opts = function()
+                        return require("plugins.config.rust-tools")
+                end,
+                config = function(_, opts)
+                        local rt = require("rust-tools")
+                        rt.setup(opts)
+                        rt.hover_actions.hover_actions()
+                end
         },
         -- Bufferline --
         {
@@ -92,25 +95,25 @@ lazy.setup({
                 end
         },
         -- debugger --
-        -- {
-        --       'mfussenegger/nvim-dap',
-        --     lazy = false,
-        --   config = function()
-        --          require("plugins.config.dap")
-        --  end
+        {
+                'mfussenegger/nvim-dap',
+                -- lazy = false,
+                -- config = function()
+                --         require("plugins.config.dap")
+                -- end
 
-        --},
+        },
         {
                 'kevinhwang91/nvim-ufo',
-                dependencies = {
-                        'kevinhwang91/promise-async'
-                },
+                dependencies = { 'kevinhwang91/promise-async' },
                 event = { "BufNewFile", "BufReadPre" },
-                config = function() 
+                init = function()
                         vim.o.foldcolumn = '1' -- '0' is not bad
                         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
                         vim.o.foldlevelstart = 99
                         vim.o.foldenable = true
+                end,
+                config = function() 
                         require('ufo').setup({
                                 preview = {
                                         mappings = {
@@ -152,7 +155,7 @@ lazy.setup({
         {
                 'nvim-tree/nvim-tree.lua',
                 name = 'nvim-tree',
-                cmd = {"NvimTreeToggle", "NvimTreeFocus"},
+                cmd = { "NvimTreeToggle", "NvimTreeFocus" },
                 config = function()
                         require("plugins.config.nvim-tree")
                 end
@@ -165,9 +168,8 @@ lazy.setup({
                 name = 'telescope',
                 lazy = true,
                 cmd = { "Telescope" },
-                priotity = 1000,
                 config = function()
-                        require('telescope').setup()
+                        require('telescope').setup{}
                 end
         },
 

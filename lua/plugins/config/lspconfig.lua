@@ -1,5 +1,7 @@
 local lspconfig = require('lspconfig')
 -- Setup buffer-local keymaps / options for LSP buffers
+local M = {}
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
@@ -21,10 +23,7 @@ local lsp_attach = function(client, buf)
         -- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
         -- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
         -- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
-        vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-        vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
-        vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
-        vim.api.nvim_buf_set_keymap(buf, 'n', '<leader>d', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(buf, 'n', '<leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         if client.server_capabilities.documentFormattingProvider then
                 vim.api.nvim_command [[augroup Format]]
                 vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -48,26 +47,5 @@ lspconfig.tailwindcss.setup {
         cmd = {"tailwindcss-language-server", "--stdio"},
         capabilities = capabilities
 }
--- Setup rust_analyzer via rust-tools.nvim
-local rt = require("rust-tools")
-rt.setup({
-        tools = {
-                inlay_hints = {
-                        auto = true,
-                        show_parameter_hints = false,
-                        parameter_hints_prefix = "",
-                        other_hints_prefix = "",
-                }
-        },
-        server = {
-                capabilities = capabilities,
-                on_attach = lsp_attach,
-                ["rust-analyzer"] = {
-                        checkOnSave = {
-                                command = "clippy"
-                        }	
-                }
-        }
-})
 
-rt.hover_actions.hover_actions()
+return M

@@ -25,14 +25,19 @@ map('n', '<S-TAB>', ':BufferLineCyclePrev<CR>')
 -- Nvim tree
 map('n', '<leader>a', ':NvimTreeToggle<CR>')
 -- Telescope
-map('n', '<leader>F', ':Telescope find_files <CR>')
-map('n', '<leader>fl', ':Telescope live_grep <CR>')
+map('n', '<leader>F', ':Telescope find_files<CR>')
+map('n', '<leader>fl', ':Telescope live_grep<CR>')
 
 -- Window splitting
 map('n', '<leader>v', ':vsplit<CR>')
 map('n', '<leader>h', ':split<CR>')
 map('n', '<leader>x', '<C-w>c')
 
+-- Debugging
+map('n', '<C-b>', ':DapToggleBreakpoint<CR>')
+map('n', '<leader>dx', ':DapTerminate<CR>')
+map('n', '<leader>do', ':DapStepOver<CR>')
+map('n', '<leader>dt', ':lua local widgets = require("dap.ui.widgets"); local sidebar = widgets.sidebar(widgets.scopes); sidebar.open()<CR>')
 
 -- Extras
 --map('n', "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>")
