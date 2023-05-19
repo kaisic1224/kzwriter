@@ -5,7 +5,9 @@ capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
         lineFoldingOnly = true
 }
+
 local lsp_attach = function(client, buf)
+        local opts = { noremap = true, silent = true }
         -- Example maps, set your own with vim.api.nvim_buf_set_keymap(buf, "n", <lhs>, <rhs>, { desc = <desc> })
         -- or a plugin like which-key.nvim
         -- <lhs>        <rhs>                        <desc>
@@ -22,6 +24,7 @@ local lsp_attach = function(client, buf)
         vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
         vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
         vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
+        vim.api.nvim_buf_set_keymap(buf, 'n', '<leader>d', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         if client.server_capabilities.documentFormattingProvider then
                 vim.api.nvim_command [[augroup Format]]
                 vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -46,7 +49,8 @@ lspconfig.tailwindcss.setup {
         capabilities = capabilities
 }
 -- Setup rust_analyzer via rust-tools.nvim
-require("rust-tools").setup({
+local rt = require("rust-tools")
+rt.setup({
         tools = {
                 inlay_hints = {
                         auto = true,
@@ -65,3 +69,5 @@ require("rust-tools").setup({
                 }
         }
 })
+
+rt.hover_actions.hover_actions()

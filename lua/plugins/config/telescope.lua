@@ -1,4 +1,1 @@
-require('telescope').setup{
-  
-}
 
