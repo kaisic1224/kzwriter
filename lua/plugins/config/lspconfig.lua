@@ -23,7 +23,7 @@ local lsp_attach = function(client, buf)
         -- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
         -- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
         -- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
-        vim.api.nvim_buf_set_keymap(buf, 'n', '<leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(buf, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         if client.server_capabilities.documentFormattingProvider then
                 vim.api.nvim_command [[augroup Format]]
                 vim.api.nvim_command [[autocmd! * <buffer>]]
