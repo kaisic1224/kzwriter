@@ -43,8 +43,15 @@ lspconfig.tsserver.setup {
 
 lspconfig.tailwindcss.setup {
         on_attach = lsp_attach,
-        filetypes = {"typescript", "typescriptreact", "typescript.tsx", "css"},
+        filetypes = {"typescript", "typescriptreact", "typescript.tsx", "css", "svelte"},
         cmd = {"tailwindcss-language-server", "--stdio"},
+        capabilities = capabilities
+}
+
+lspconfig.svelte.setup {
+        on_attach = lsp_attach,
+        filetypes = {"svelte"},
+        cmd = { "svelteserver", "--stdio" },
         capabilities = capabilities
 }
 

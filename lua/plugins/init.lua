@@ -218,7 +218,7 @@ lazy.setup({
                 'windwp/nvim-ts-autotag',
                 name = "ts-autotag",
                 lazy = true,
-                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact" },
+                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte" },
                 config = function()
                         require('nvim-ts-autotag').setup()
                 end
