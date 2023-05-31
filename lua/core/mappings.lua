@@ -19,6 +19,15 @@ map('n', '<A-j>', ':move +1 <CR>')
 map('n', '<A-k>', ':move -2 <CR>')
 map('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
 
+-- Visual mode other keys
+-- moving highlighted block of text
+map('x', '<S-l>', 'dp`[1v')
+map('x', '<S-h>', 'dhhp`[1v')
+map('x', '<S-k>', 'dkp1v')
+map('x', '<S-j>', 'djp1v')
+map('x', '<A-k>', '$o0dkp1v')
+map('x', '<A-j>', '$o0djp1v')
+
 -- Bufferline 
 map('n', '<TAB>', ':BufferLineCycleNext<CR>')
 map('n', '<S-TAB>', ':BufferLineCyclePrev<CR>')
