@@ -28,7 +28,6 @@ local lsp_attach = function(client, buf)
                 vim.api.nvim_command [[autocmd! * <buffer>]]
                 vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
                 vim.api.nvim_command [[autogroup END]]
-       
         end
 end
 
