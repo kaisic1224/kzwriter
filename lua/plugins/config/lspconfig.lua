@@ -53,4 +53,8 @@ lspconfig.svelte.setup {
         capabilities = capabilities
 }
 
+
+M.capabilities = capabilities;
+M.on_attach = lsp_attach;
+
 return M

@@ -18,7 +18,7 @@ local options = {
         },
         server = {
                 capabilities = M.capabilities,
-                on_attach = M.lsp_attach,
+                on_attach = M.on_attach,
                 ["rust-analyzer"] = {
                         checkOnSave = {
                                 command = "clippy"
