@@ -41,6 +41,7 @@ lazy.setup({
         { 
                 'windwp/nvim-autopairs',
                 name = 'nvim-autopairs',
+                priority = 10000,
                 event = { "VeryLazy" },
                 config = function()
                         require("plugins.config.autopairs") 

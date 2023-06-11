@@ -17,7 +17,6 @@ map('n', '<C-s>', ':w <CR>')
 map('n', '<C-q>', ':bd!<CR>')
 map('n', '<A-j>', ':move +1 <CR>')
 map('n', '<A-k>', ':move -2 <CR>')
-map('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
 
 -- Visual mode other keys
 -- moving highlighted block of text
