@@ -85,16 +85,22 @@ lazy.setup({
                         rt.hover_actions.hover_actions()
                 end
         },
-        -- Bufferline --
         {
-                'akinsho/bufferline.nvim',
-                name = 'bufferline',
-                event = { "BufWinEnter" },
-                priority = 1000,
+                "folke/trouble.nvim", 
                 config = function()
-                        require("plugins.config.bufferline")
+                        require('trouble').setup()
                 end
         },
+        -- Bufferline --
+        -- {
+        --         'akinsho/bufferline.nvim',
+        --         name = 'bufferline',
+        --         event = { "BufWinEnter" },
+        --         priority = 1000,
+        --         config = function()
+        --                 require("plugins.config.bufferline")
+        --         end
+        -- },
         -- debugger --
         {
                 'mfussenegger/nvim-dap',
