@@ -22,6 +22,7 @@ local set_window_option = function(option, value)
     end
 end
 
+vim.g.netrw_banner = 0;
 vim.cmd('filetype plugin indent on')
 set_option('shortmess', vim.o.shortmess .. 'c')
 set_option('pumheight', 0)

@@ -8,9 +8,10 @@ require'nvim-treesitter.configs'.setup {
                 "css",
                 "tsx"
         },
-       -- Install parsers synchronously (only applied to `ensure_installed`)
+        -- Install parsers synchronously (only applied to `ensure_installed`)
         -- Automatically install missing parsers when entering buffer
         -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+        -- Recommendation: set to false
         auto_install = false,
         highlight = {
                 enable = true,

@@ -23,7 +23,10 @@ local lsp_attach = function(client, buf)
         -- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
         -- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
         -- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
+        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { buffer = buf })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf })
+        -- vim.keymap.set("n", "<leader>fs", vim.lsp.buf.document_symbol, { buffer = buf })
+
         if client.server_capabilities.documentFormattingProvider then
                 vim.api.nvim_command [[augroup Format]]
                 vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -42,7 +45,7 @@ lspconfig.tsserver.setup {
 
 lspconfig.tailwindcss.setup {
         on_attach = lsp_attach,
-        filetypes = {"typescript", "typescriptreact", "typescript.tsx", "css", "svelte"},
+        filetypes = {"typescriptreact", "typescript.tsx", "css", "svelte"},
         cmd = {"tailwindcss-language-server", "--stdio"},
         capabilities = capabilities
 }
@@ -51,6 +54,13 @@ lspconfig.svelte.setup {
         on_attach = lsp_attach,
         filetypes = {"svelte"},
         cmd = { "svelteserver", "--stdio" },
+        capabilities = capabilities
+}
+
+lspconfig.pyright.setup {
+        on_attach = lsp_attach,
+        filetypes = {"python"},
+        cmd = { "pyright-langserver", "--stdio" },
         capabilities = capabilities
 }
 

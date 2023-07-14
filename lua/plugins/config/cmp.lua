@@ -37,8 +37,7 @@ cmp.setup({
                 end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-                { name = 'nvim_lsp', max_item_count = 30, keyword_length = 3, },
-                -- { name = "path" },
+                { name = 'nvim_lsp', max_item_count = 12, keyword_length = 3, },
         }, {
                 { name = 'buffer', keyword_length = 3 },
         })

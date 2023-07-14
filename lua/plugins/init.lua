@@ -87,8 +87,23 @@ lazy.setup({
         },
         {
                 "folke/trouble.nvim", 
+                name = "trouble",
+                cmd = { "TroubleToggle" },
                 config = function()
-                        require('trouble').setup()
+                        require('trouble').setup {
+                                icons = false,
+                                fold_open = "v", -- icon used for open folds
+                                fold_closed = ">", -- icon used for closed folds
+                                indent_lines = false, -- add an indent guide below the fold icons
+                                signs = {
+                                        -- icons / text used for a diagnostic
+                                        error = "error",
+                                        warning = "warn",
+                                        hint = "hint",
+                                        information = "info"
+                                },
+                                use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+                        }
                 end
         },
         -- Bufferline --
@@ -104,7 +119,9 @@ lazy.setup({
         -- debugger --
         {
                 'mfussenegger/nvim-dap',
-                -- lazy = false,
+                name = "nvim-dap",
+                lazy = true,
+                keys = { "<C-b> "},
                 -- config = function()
                 --         require("plugins.config.dap")
                 -- end
@@ -112,13 +129,15 @@ lazy.setup({
         },
         {
                 'kevinhwang91/nvim-ufo',
+                name = "nvim-ufo",
                 dependencies = { 'kevinhwang91/promise-async' },
                 init = function()
-                        vim.o.foldcolumn = '1' -- '0' is not bad
+                        vim.o.foldcolumn = '0' -- '0' is not bad
                         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
                         vim.o.foldlevelstart = 99
                         vim.o.foldenable = true
                 end,
+                event = { "BufReadPre",  },
                 config = function() 
                         require('ufo').setup({
                                 preview = {
@@ -134,9 +153,9 @@ lazy.setup({
         {
                 'numToStr/Comment.nvim',
                 lazy = true,
-                keys = { "gcc" },
+                keys = { "gcc", "gc", "gbc", "gb" },
                 config = function()
-                        require('Comment').setup()
+                        require('Comment').setup{}
                 end
 
         },
@@ -158,14 +177,14 @@ lazy.setup({
 
         -- Nvim tree file viewer --
 
-        {
-                'nvim-tree/nvim-tree.lua',
-                name = 'nvim-tree',
-                cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-                config = function()
-                        require("plugins.config.nvim-tree")
-                end
-        },
+        -- {
+        --         'nvim-tree/nvim-tree.lua',
+        --         name = 'nvim-tree',
+        --         cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+        --         config = function()
+        --                 require("plugins.config.nvim-tree")
+        --         end
+        -- },
 
         -- Telescope stuffs -- 
         {
@@ -191,6 +210,15 @@ lazy.setup({
                         require("plugins.config.treesitter")
                 end
         },
+        {
+                'nvim-treesitter/nvim-treesitter-context',
+                name = 'treesitter-context',
+                event = { "BufNewFile", "BufReadPre" },
+                lazy = true,
+                config = function()
+                        require('treesitter-context').setup{}
+                end,
+        },
 
         -- Statusline (staline) --
         -- {
@@ -204,15 +232,15 @@ lazy.setup({
         -- },
 
         -- gitsigns stuffs --
-        {
-                'lewis6991/gitsigns.nvim',
-                name = 'gitsigns',
-                lazy = true,
-                event = { "BufWritePre", "BufReadPre" },
-                config = function()
-                        require("plugins.config.gitsigns")
-                end
-        },
+        -- {
+        --         'lewis6991/gitsigns.nvim',
+        --         name = 'gitsigns',
+        --         lazy = true,
+        --         event = { "BufWritePre", "BufReadPre" },
+        --         config = function()
+        --                 require("plugins.config.gitsigns")
+        --         end
+        -- },
         -- {
         --         'jose-elias-alvarez/null-ls.nvim',
         --         lazy = false,
@@ -229,13 +257,16 @@ lazy.setup({
                         require('nvim-ts-autotag').setup()
                 end
         },
-        -- {
-        --         'MunifTanjim/prettier.nvim',
-        --         lazy = false,
-        --         config = function()
-        --                 require("plugins.config.prettier")
-        --         end
-        -- },
+        {
+               'mfussenegger/nvim-lint',
+               name = 'nvim-lint',
+               ft = { "python" },
+               config = function()
+                       require("plugins.config.nvim-lint")
+               end
+        },
+        
+        
         -- {
         --         'nvim-tree/nvim-web-devicons',
         --         lazy = true,
@@ -258,10 +289,10 @@ lazy.setup({
                                 "logipat",
                                 "man",
                                 "matchparen",
-                                "netrw",
-                                "netrwPlugin",
-                                "netrwSettings",
-                                "netrwFileHandlers",
+                                -- "netrw",
+                                -- "netrwPlugin",
+                                -- "netrwSettings",
+                                -- "netrwFileHandlers",
                                 "matchit",
                                 "tar",
                                 "tarPlugin",
