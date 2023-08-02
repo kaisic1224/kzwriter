@@ -17,7 +17,7 @@ if not ok then return end
 lazy.setup({
 
         -- Colorscheme --
-        --{
+        -- {
         --        'rose-pine/neovim',
         --        name = 'rose-pine',
         --        lazy = false,
@@ -25,8 +25,8 @@ lazy.setup({
         --        config = function()
         --                vim.cmd('colorscheme rose-pine')
         --        end
-        --},
-
+        -- },
+        
         {
                 'catppuccin/nvim',
                 name = 'catppuccin',
@@ -132,14 +132,17 @@ lazy.setup({
                 name = "nvim-ufo",
                 dependencies = { 'kevinhwang91/promise-async' },
                 init = function()
-                        vim.o.foldcolumn = '0' -- '0' is not bad
+                        vim.o.foldcolumn = '1' -- '0' is not bad
                         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
                         vim.o.foldlevelstart = 99
                         vim.o.foldenable = true
                 end,
-                event = { "BufReadPre",  },
+                event = { "BufReadPre", },
                 config = function() 
                         require('ufo').setup({
+                                provider_selector = function(bufnr, filetype, buftype)
+                                        return {'treesitter', 'indent'}
+                                end,
                                 preview = {
                                         mappings = {
                                                 scrollU = '<C-u>',
@@ -153,7 +156,7 @@ lazy.setup({
         {
                 'numToStr/Comment.nvim',
                 lazy = true,
-                keys = { "gcc", "gc", "gbc", "gb" },
+                keys = { "gcc", "gc", "gc", "gbc", "gb", "gb" },
                 config = function()
                         require('Comment').setup{}
                 end
@@ -265,6 +268,13 @@ lazy.setup({
                        require("plugins.config.nvim-lint")
                end
         },
+        -- {
+        --         'mhartington/formatter.nvim',
+        --         name = 'formatter',
+        --         config = function()
+        --                 require("plugins.config.formatter")
+        --         end
+        -- }
         
         
         -- {

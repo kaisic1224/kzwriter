@@ -3,10 +3,6 @@ local lspconfig = require('lspconfig')
 local M = {}
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true
-}
 
 local lsp_attach = function(client, buf)
         local opts = { noremap = true, silent = true }
@@ -23,6 +19,7 @@ local lsp_attach = function(client, buf)
         -- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
         -- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
         -- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = buf })
         vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { buffer = buf })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf })
         -- vim.keymap.set("n", "<leader>fs", vim.lsp.buf.document_symbol, { buffer = buf })
@@ -61,7 +58,17 @@ lspconfig.pyright.setup {
         on_attach = lsp_attach,
         filetypes = {"python"},
         cmd = { "pyright-langserver", "--stdio" },
-        capabilities = capabilities
+        capabilities = capabilities,
+        settings = {
+                python = {
+                                analysis = {
+                                        useLibraryCodeForTypes = true,
+                                        typeCheckingMode = 'off',
+                                        diagnosticMode = 'openFilesOnly',
+                                        autoSearchPaths = true,
+                                }
+                        }
+        }
 }
 
 
