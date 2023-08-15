@@ -54,6 +54,15 @@ lspconfig.svelte.setup {
         capabilities = capabilities
 }
 
+local venv_path = os.getenv('VIRTUAL_ENV')
+local py_path = nil
+-- decide which python executable to use for mypy
+if venv_path ~= nil then
+        py_path = venv_path .. "/bin/python3"
+else
+        py_path = vim.g.python3_host_prog
+end
+
 lspconfig.pyright.setup {
         on_attach = lsp_attach,
         filetypes = {"python"},
@@ -61,13 +70,14 @@ lspconfig.pyright.setup {
         capabilities = capabilities,
         settings = {
                 python = {
-                                analysis = {
-                                        useLibraryCodeForTypes = true,
-                                        typeCheckingMode = 'off',
-                                        diagnosticMode = 'openFilesOnly',
-                                        autoSearchPaths = true,
-                                }
-                        }
+                        analysis = {
+                                autoSearchPaths = true,
+                                diagnosticMode = "openFilesOnly",
+                                useLibraryCodeForTypes = true,
+                                typeCheckingMode = 'basic',
+                                -- stubPath = vim.fn.stdpath("data") .. "/site/p"
+                        },
+                }
         }
 }
 
