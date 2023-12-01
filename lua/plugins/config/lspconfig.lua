@@ -35,52 +35,71 @@ end
 
 lspconfig.tsserver.setup {
         on_attach = lsp_attach,
-        filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
-        cmd = { "typescript-language-server", "--stdio"},
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        cmd = { "typescript-language-server", "--stdio" },
         capabilities = capabilities
 }
 
 lspconfig.tailwindcss.setup {
         on_attach = lsp_attach,
-        filetypes = {"typescriptreact", "typescript.tsx", "css", "svelte"},
-        cmd = {"tailwindcss-language-server", "--stdio"},
+        filetypes = { "typescriptreact", "typescript.tsx", "css", "svelte" },
+        root_dir = lspconfig.util.root_pattern('tailwind.config.js', 'postcss.config.js'),
+        cmd = { "tailwindcss-language-server", "--stdio" },
         capabilities = capabilities
 }
 
 lspconfig.svelte.setup {
         on_attach = lsp_attach,
-        filetypes = {"svelte"},
+        filetypes = { "svelte" },
         cmd = { "svelteserver", "--stdio" },
         capabilities = capabilities
 }
 
-local venv_path = os.getenv('VIRTUAL_ENV')
-local py_path = nil
--- decide which python executable to use for mypy
-if venv_path ~= nil then
-        py_path = venv_path .. "/bin/python3"
-else
-        py_path = vim.g.python3_host_prog
+lspconfig.lua_ls.setup {
+        on_attach = lsp_attach,
+        capabilities = capabilities,
+        filetypes = { "lua" },
+        settings = {
+                Lua = {
+                        format = {
+                                enable = true,
+                                -- Put format options here
+                                -- NOTE: the value should be STRING!!
+                                defaultConfig = {
+                                        indent_style = "space",
+                                        indent_size = "2",
+                                }
+                        },
+                }
+        }
+}
+
+local function get_python_path(path)
+        if vim.env.VIRTUAL_ENV then
+                return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+        end
 end
 
+
 lspconfig.pyright.setup {
+        before_init = function(_, config)
+                config.settings.python.pythonPath = get_python_path(config.root_dir)
+        end,
         on_attach = lsp_attach,
-        filetypes = {"python"},
-        cmd = { "pyright-langserver", "--stdio" },
         capabilities = capabilities,
+        cmd = { "pyright-langserver", "--stdio" },
+        filetypes = { "python" },
         settings = {
                 python = {
                         analysis = {
                                 autoSearchPaths = true,
                                 diagnosticMode = "openFilesOnly",
                                 useLibraryCodeForTypes = true,
-                                typeCheckingMode = 'basic',
-                                -- stubPath = vim.fn.stdpath("data") .. "/site/p"
-                        },
+                                autoImportCompletions = true,
+                        }
                 }
         }
 }
-
 
 M.capabilities = capabilities;
 M.on_attach = lsp_attach;

@@ -1,9 +1,9 @@
 vim.g.mapleader = " "
 
 local map = function(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+        local options = { noremap = true, silent = true }
+        if opts then options = vim.tbl_extend('force', options, opts) end
+        vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 -- Navigation keys in insert mode
@@ -23,8 +23,10 @@ map('n', '<A-k>', ':move -2 <CR>')
 -- Visual mode other keys
 -- moving highlighted block of text
 map('x', '<A-j>', '$o0djp1v')
+-- surrounding in quotes
+map('x', '<S-s>', ':s/\\%V\\(.*\\)\\%V/"\\1"/<CR>')
 
--- Bufferline 
+-- Bufferline
 map('n', '<TAB>', ':bnext<CR>')
 map('n', '<S-TAB>', ':bprevious<CR>')
 
@@ -49,7 +51,8 @@ map('n', '<leader>x', '<C-w>c')
 map('n', '<C-b>', ':DapToggleBreakpoint<CR>')
 map('n', '<leader>dx', ':DapTerminate<CR>')
 map('n', '<leader>do', ':DapStepOver<CR>')
-map('n', '<leader>dt', ':lua local widgets = require("dap.ui.widgets"); local sidebar = widgets.sidebar(widgets.scopes); sidebar.open()<CR>')
+map('n', '<leader>dt',
+        ':lua local widgets = require("dap.ui.widgets"); local sidebar = widgets.sidebar(widgets.scopes); sidebar.open()<CR>')
 
 -- Trouble nvim
 map('n', '<leader>xd', ':TroubleToggle quickfix<CR>')

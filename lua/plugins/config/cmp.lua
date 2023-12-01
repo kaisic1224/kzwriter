@@ -1,4 +1,4 @@
-local cmp = require'cmp'
+local cmp = require 'cmp'
 local luasnip = require('luasnip')
 vim.opt.completeopt = "menu,menuone,noinsert"
 local function has_words_before()
@@ -25,7 +25,7 @@ cmp.setup({
                         else
                                 fallback()
                         end
-                end, { "i", "s" }),         
+                end, { "i", "s" }),
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                                 cmp.select_prev_item()
@@ -42,6 +42,22 @@ cmp.setup({
                 { name = 'buffer', keyword_length = 3 },
         })
 })
+
+function leave_snippet()
+        if
+            ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+            and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+            and not require('luasnip').session.jump_active
+        then
+                require('luasnip').unlink_current()
+        end
+end
+
+-- stop snippets when you leave to normal mode
+vim.api.nvim_command([[
+    autocmd ModeChanged * lua leave_snippet()
+]])
+
 
 -- cmp.setup.cmdline(':', {
 --         mapping = cmp.mapping.preset.cmdline(),

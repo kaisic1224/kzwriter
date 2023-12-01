@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then 
+if not vim.loop.fs_stat(lazypath) then
         print "Waittt, bootstrapping lazy.nvim ..."
         vim.fn.system({
                 "git",
@@ -26,7 +26,6 @@ lazy.setup({
         --                vim.cmd('colorscheme rose-pine')
         --        end
         -- },
-        
         {
                 'catppuccin/nvim',
                 name = 'catppuccin',
@@ -38,13 +37,13 @@ lazy.setup({
         },
 
         -- Autopairings --
-        { 
+        {
                 'windwp/nvim-autopairs',
                 name = 'nvim-autopairs',
                 priority = 10000,
                 event = { "VeryLazy" },
                 config = function()
-                        require("plugins.config.autopairs") 
+                        require("plugins.config.autopairs")
                 end
         },
 
@@ -73,7 +72,7 @@ lazy.setup({
         },
         {
                 'simrat39/rust-tools.nvim',
-                dependencies = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim"},
+                dependencies = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" },
                 name = "rust-tools",
                 ft = "rust",
                 opts = function()
@@ -86,14 +85,14 @@ lazy.setup({
                 end
         },
         {
-                "folke/trouble.nvim", 
+                "folke/trouble.nvim",
                 name = "trouble",
                 cmd = { "TroubleToggle" },
                 config = function()
                         require('trouble').setup {
                                 icons = false,
-                                fold_open = "v", -- icon used for open folds
-                                fold_closed = ">", -- icon used for closed folds
+                                fold_open = "v",      -- icon used for open folds
+                                fold_closed = ">",    -- icon used for closed folds
                                 indent_lines = false, -- add an indent guide below the fold icons
                                 signs = {
                                         -- icons / text used for a diagnostic
@@ -121,7 +120,7 @@ lazy.setup({
                 'mfussenegger/nvim-dap',
                 name = "nvim-dap",
                 lazy = true,
-                keys = { "<C-b> "},
+                keys = { "<C-b> " },
                 -- config = function()
                 --         require("plugins.config.dap")
                 -- end
@@ -133,15 +132,15 @@ lazy.setup({
                 dependencies = { 'kevinhwang91/promise-async' },
                 init = function()
                         vim.o.foldcolumn = '1' -- '0' is not bad
-                        vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+                        vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
                         vim.o.foldlevelstart = 99
                         vim.o.foldenable = true
                 end,
                 event = { "BufReadPre", },
-                config = function() 
+                config = function()
                         require('ufo').setup({
                                 provider_selector = function(bufnr, filetype, buftype)
-                                        return {'treesitter', 'indent'}
+                                        return { 'treesitter', 'indent' }
                                 end,
                                 preview = {
                                         mappings = {
@@ -158,7 +157,7 @@ lazy.setup({
                 lazy = true,
                 keys = { "gcc", "gc", "gc", "gbc", "gb", "gb" },
                 config = function()
-                        require('Comment').setup{}
+                        require('Comment').setup {}
                 end
 
         },
@@ -189,7 +188,7 @@ lazy.setup({
         --         end
         -- },
 
-        -- Telescope stuffs -- 
+        -- Telescope stuffs --
         {
                 'alvarosevilla95/telescope.nvim',
                 dependencies = { 'nvim-lua/plenary.nvim' },
@@ -197,7 +196,7 @@ lazy.setup({
                 lazy = true,
                 cmd = { "Telescope" },
                 config = function()
-                        require('telescope').setup{}
+                        require('telescope').setup {}
                 end
         },
 
@@ -219,7 +218,7 @@ lazy.setup({
                 event = { "BufNewFile", "BufReadPre" },
                 lazy = true,
                 config = function()
-                        require('treesitter-context').setup{}
+                        require('treesitter-context').setup {}
                 end,
         },
 
@@ -261,12 +260,12 @@ lazy.setup({
                 end
         },
         {
-               'mfussenegger/nvim-lint',
-               name = 'nvim-lint',
-               ft = { "python" },
-               config = function()
-                       require("plugins.config.nvim-lint")
-               end
+                'mfussenegger/nvim-lint',
+                name = 'nvim-lint',
+                ft = { "python" },
+                config = function()
+                        require("plugins.config.nvim-lint")
+                end
         },
         -- {
         --         'mhartington/formatter.nvim',
@@ -275,8 +274,6 @@ lazy.setup({
         --                 require("plugins.config.formatter")
         --         end
         -- }
-        
-        
         -- {
         --         'nvim-tree/nvim-web-devicons',
         --         lazy = true,
@@ -284,12 +281,19 @@ lazy.setup({
         --                 require("plugins.config.icons")
         --         end
         -- }
+        {
+                'lervag/vimtex',
+                name = 'vimtex',
+                config = function()
+                        require("plugins.config.vimtex")
+                end,
+        }
 
 
-},{ 
+}, {
         performance = {
                 rtp = {
-                        disabled_plugins = {      
+                        disabled_plugins = {
                                 "2html_plugin",
                                 "tohtml",
                                 "getscript",
@@ -322,6 +326,6 @@ lazy.setup({
                                 "ftplugin",
                         },
                 },
-        },                                                                                                                                                                                                                          
+        },
 }
 )
