@@ -5,7 +5,7 @@ local M = {}
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lsp_attach = function(client, buf)
-        local opts = { noremap = true, silent = true }
+        -- local opts = { noremap = true, silent = true }
         -- Example maps, set your own with vim.api.nvim_buf_set_keymap(buf, "n", <lhs>, <rhs>, { desc = <desc> })
         -- or a plugin like which-key.nvim
         -- <lhs>        <rhs>                        <desc>
@@ -74,34 +74,53 @@ lspconfig.lua_ls.setup {
         }
 }
 
-local function get_python_path(path)
-        if vim.env.VIRTUAL_ENV then
-                return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-        end
-end
+-- local function get_python_path(path)
+--         conda = vim.env.CONDA_PREFIX
+--         if conda then
+--                 return path .. path.join(conda, "lib", "python3.11", "site-packages")
+--         end
+-- end
 
+
+-- lspconfig.pylsp.setup {
+--         before_init = function(_, config)
+--                 config.settings.python.pythonPath = get_python_path('/home/vincent/miniconda3/envs/nvim/bin/pylsp:')
+--                 vim.g.python3_host_prog = '/home/vincent/miniconda3/envs/nvim/bin/python'
+--         end,
+--         on_attach = lsp_attach,
+--         capabilities = capabilities,
+--         filetypes = { "python" },
+--         cmd = { "/home/vincent/miniconda3/envs/nvim/bin/pylsp" },
+--         settings = {
+--                 pylsp = {
+--                         plugins = {
+--                                 pycodestyle = {
+--                                         ignore = { 'W391' },
+--                                         maxLineLength = 140
+--                                 },
+--                                 jedi_completion = { fuzzy = true },
+--                         }
+--                 }
+--         }
+-- }
 
 lspconfig.pyright.setup {
-        before_init = function(_, config)
-                config.settings.python.pythonPath = get_python_path(config.root_dir)
-        end,
         on_attach = lsp_attach,
         capabilities = capabilities,
-        cmd = { "pyright-langserver", "--stdio" },
-        filetypes = { "python" },
+        cmd = { "/home/vincent/miniconda3/envs/nvim/bin/pyright-langserver", "--stdio" },
         settings = {
                 python = {
                         analysis = {
+                                typeCheckingMode = "basic",
                                 autoSearchPaths = true,
                                 diagnosticMode = "openFilesOnly",
-                                useLibraryCodeForTypes = true,
-                                autoImportCompletions = true,
-                        }
+                                useLibraryCodeForTypes = true
+                        },
+                        pythonPath = vim.fn.exepath("python3")
                 }
         }
 }
 
 M.capabilities = capabilities;
 M.on_attach = lsp_attach;
-
 return M

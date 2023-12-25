@@ -55,6 +55,7 @@ lazy.setup({
                         'saadparwaiz1/cmp_luasnip',
                         'hrsh7th/cmp-nvim-lsp',
                         'hrsh7th/cmp-buffer',
+                        'hrsh7th/cmp-nvim-lsp-signature-help',
                 },
                 lazy = true,
                 event = "InsertEnter",
@@ -116,16 +117,16 @@ lazy.setup({
         --         end
         -- },
         -- debugger --
-        {
-                'mfussenegger/nvim-dap',
-                name = "nvim-dap",
-                lazy = true,
-                keys = { "<C-b> " },
-                -- config = function()
-                --         require("plugins.config.dap")
-                -- end
-
-        },
+        -- {
+        --         'mfussenegger/nvim-dap',
+        --         name = "nvim-dap",
+        --         lazy = true,
+        --         keys = { "<C-b> " },
+        --         -- config = function()
+        --         --         require("plugins.config.dap")
+        --         -- end
+        --
+        -- },
         {
                 'kevinhwang91/nvim-ufo',
                 name = "nvim-ufo",
@@ -154,8 +155,7 @@ lazy.setup({
         -- comments
         {
                 'numToStr/Comment.nvim',
-                lazy = true,
-                keys = { "gcc", "gc", "gc", "gbc", "gb", "gb" },
+                lazy = false,
                 config = function()
                         require('Comment').setup {}
                 end
@@ -259,14 +259,14 @@ lazy.setup({
                         require('nvim-ts-autotag').setup()
                 end
         },
-        {
-                'mfussenegger/nvim-lint',
-                name = 'nvim-lint',
-                ft = { "python" },
-                config = function()
-                        require("plugins.config.nvim-lint")
-                end
-        },
+        -- {
+        --         'mfussenegger/nvim-lint',
+        --         name = 'nvim-lint',
+        --         ft = { "python" },
+        --         config = function()
+        --                 require("plugins.config.nvim-lint")
+        --         end
+        -- },
         -- {
         --         'mhartington/formatter.nvim',
         --         name = 'formatter',

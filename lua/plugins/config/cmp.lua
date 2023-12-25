@@ -37,19 +37,20 @@ cmp.setup({
                 end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-                { name = 'nvim_lsp', max_item_count = 12, keyword_length = 3, },
+                { name = 'nvim_lsp',               max_item_count = 12, keyword_length = 3, },
+                { name = 'nvim_lsp_signature_help' }
         }, {
-                { name = 'buffer', keyword_length = 3 },
+                { name = 'buffer', keyword_length = 5 },
         })
 })
 
 function leave_snippet()
         if
             ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
-            and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
-            and not require('luasnip').session.jump_active
+            and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+            and not luasnip.session.jump_active
         then
-                require('luasnip').unlink_current()
+                luasnip.unlink_current()
         end
 end
 

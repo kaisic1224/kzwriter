@@ -20,13 +20,14 @@ local options = {
                 capabilities = M.capabilities,
                 on_attach = function(client, buf)
                         M.on_attach(client, buf)
-                        vim.keymap.set("n", "<leader>K", require("rust-tools").hover_actions.hover_actions, { buffer = buf })
+                        vim.keymap.set("n", "<leader>K", require("rust-tools").hover_actions.hover_actions,
+                                { buffer = buf })
                 end,
                 settings = {
                         ["rust-analyzer"] = {
                                 checkOnSave = {
                                         command = "clippy"
-                                }	
+                                }
                         },
                 },
         },
