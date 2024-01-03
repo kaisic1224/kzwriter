@@ -1,30 +1,32 @@
 local set_option = function(option, value)
-    if type(vim.o[option]) == 'boolean' then
-        vim.o[option] = value
-    else
-        vim.o[option] = tostring(value)
-    end
+        if type(vim.o[option]) == 'boolean' then
+                vim.o[option] = value
+        else
+                vim.o[option] = tostring(value)
+        end
 end
 
 local set_buffer_option = function(option, value)
-    if type(vim.bo[option]) == 'boolean' then
-        vim.bo[option] = value
-    else
-        vim.bo[option] = tostring(value)
-    end
+        if type(vim.bo[option]) == 'boolean' then
+                vim.bo[option] = value
+        else
+                vim.bo[option] = tostring(value)
+        end
 end
 
 local set_window_option = function(option, value)
-    if type(vim.wo[option]) == 'boolean' then
-        vim.wo[option] = value
-    else
-        vim.wo[option] = tostring(value)
-    end
+        if type(vim.wo[option]) == 'boolean' then
+                vim.wo[option] = value
+        else
+                vim.wo[option] = tostring(value)
+        end
 end
 
 vim.g.netrw_banner = 0;
 vim.g.vimtex_view_method = 'zathura'
 vim.cmd('filetype plugin indent on')
+-- cmp
+set_option("completeopt", "menu,menuone,noinsert")
 set_option('shortmess', vim.o.shortmess .. 'c')
 set_option('pumheight', 0)
 set_option('fileencoding', 'utf-8')
