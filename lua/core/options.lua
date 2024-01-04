@@ -27,6 +27,11 @@ vim.g.vimtex_view_method = 'zathura'
 vim.cmd('filetype plugin indent on')
 -- cmp
 set_option("completeopt", "menu,menuone,noinsert")
+-- nvim-ufo
+set_option('foldcolumn', '1')
+set_option('foldlevel', 99)
+set_option('foldlevelstart', 99)
+set_option('foldenable', true)
 set_option('shortmess', vim.o.shortmess .. 'c')
 set_option('pumheight', 0)
 set_option('fileencoding', 'utf-8')
