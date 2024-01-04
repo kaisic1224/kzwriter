@@ -40,7 +40,8 @@ lazy.setup({
         {
                 'windwp/nvim-autopairs',
                 name = 'nvim-autopairs',
-                event = { "InsertEnter" },
+                priority = 10000,
+                event = { "VeryLazy" },
                 config = function()
                         require("plugins.config.autopairs")
                 end
@@ -130,6 +131,13 @@ lazy.setup({
                 'kevinhwang91/nvim-ufo',
                 name = "nvim-ufo",
                 dependencies = { 'kevinhwang91/promise-async' },
+                init = function()
+                        vim.o.foldcolumn = '1' -- '0' is not bad
+                        vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+                        vim.o.foldlevelstart = 99
+                        vim.o.foldenable = true
+                end,
+                event = { "BufReadPre", },
                 config = function()
                         require('ufo').setup({
                                 provider_selector = function(bufnr, filetype, buftype)
@@ -246,7 +254,7 @@ lazy.setup({
                 'windwp/nvim-ts-autotag',
                 name = "ts-autotag",
                 lazy = true,
-                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte", "vue" },
+                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte" },
                 config = function()
                         require('nvim-ts-autotag').setup()
                 end
