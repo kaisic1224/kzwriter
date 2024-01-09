@@ -121,6 +121,11 @@ lspconfig.pyright.setup {
         }
 }
 
+lspconfig.clangd.setup {
+        on_attach = lsp_attach,
+        capabilities = capabilities,
+}
+
 M.capabilities = capabilities;
 M.on_attach = lsp_attach;
 return M
