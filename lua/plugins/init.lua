@@ -196,7 +196,7 @@ lazy.setup({
                 lazy = true,
                 cmd = { "Telescope" },
                 config = function()
-                        require('telescope').setup {}
+                        require('plugins.config.telescope')
                 end
         },
 

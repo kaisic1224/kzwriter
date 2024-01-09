@@ -39,7 +39,7 @@ map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 map("x", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 
 -- Telescope
-map('n', '<leader>F', ':Telescope find_files<CR>')
+map('n', '<leader>F', ":Telescope find_files<CR>")
 map('n', '<leader>fl', ':Telescope live_grep<CR>')
 
 -- Window splitting
