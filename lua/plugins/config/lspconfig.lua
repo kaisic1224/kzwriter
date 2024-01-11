@@ -35,9 +35,13 @@ end
 
 lspconfig.tsserver.setup {
         on_attach = lsp_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte", "vue" },
         cmd = { "typescript-language-server", "--stdio" },
         capabilities = capabilities
+}
+
+lspconfig.volar.setup {
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }
 
 lspconfig.tailwindcss.setup {
