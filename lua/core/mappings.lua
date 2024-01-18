@@ -57,8 +57,8 @@ map('n', '<leader>dt',
 -- Trouble nvim
 map('n', '<leader>xd', ':TroubleToggle quickfix<CR>')
 
--- Extras
---map('n', "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>")
---map('n', "<S-CR>", ":lua require'dap'.continue()<CR>")
---map('n', "<C-bl>", ":lua require'dap'.step_over()<CR>")
---map('n', "<C-bj>", ":lua require'dap'.step_into()<CR>")
+-- Debugging
+map('n', "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>")
+map('n', "<C-CR>", ":lua require'dap'.continue()<CR>")
+map('n', "<C-l>", ":lua require'dap'.step_over()<CR>")
+map('n', "<C-j>", ":lua require'dap'.step_into()<CR>")

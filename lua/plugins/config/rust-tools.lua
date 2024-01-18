@@ -1,10 +1,7 @@
 local M = require("plugins.config.lspconfig")
--- Update this path
-local extension_path = vim.env.HOME .. '/.vscode-oss/extensions/vadimcn.vscode-lldb-1.9.1-universal/'
-local codelldb_path = extension_path .. 'adapter/codelldb'
-local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
 -- Setup rust_analyzer via rust-tools.nvim
-local options = {
+
+vim.g.rustaceanvim = {
         tools = {
                 inlay_hints = {
                         auto = true,
@@ -20,8 +17,6 @@ local options = {
                 capabilities = M.capabilities,
                 on_attach = function(client, buf)
                         M.on_attach(client, buf)
-                        vim.keymap.set("n", "<leader>K", require("rust-tools").hover_actions.hover_actions,
-                                { buffer = buf })
                 end,
                 settings = {
                         ["rust-analyzer"] = {
@@ -32,8 +27,6 @@ local options = {
                 },
         },
         -- dap = {
-        --         adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+        --         adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path)
         -- }
 }
-
-return options

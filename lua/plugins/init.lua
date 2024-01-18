@@ -72,17 +72,16 @@ lazy.setup({
                 end
         },
         {
-                'simrat39/rust-tools.nvim',
-                dependencies = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" },
-                name = "rust-tools",
-                ft = "rust",
-                opts = function()
-                        return require("plugins.config.rust-tools")
-                end,
-                config = function(_, opts)
-                        local rt = require("rust-tools")
-                        rt.setup(opts)
-                        rt.hover_actions.hover_actions()
+                name = "rustaceanvim",
+                'mrcjkb/rustaceanvim',
+                version = '^3',
+                dependencies = {
+                        "nvim-lua/plenary.nvim",
+                        "mfussenegger/nvim-dap"
+                },
+                ft = { "rust" },
+                config = function()
+                        require("plugins.config.rust-tools")
                 end
         },
         -- {
@@ -117,16 +116,16 @@ lazy.setup({
         --         end
         -- },
         -- debugger --
-        -- {
-        --         'mfussenegger/nvim-dap',
-        --         name = "nvim-dap",
-        --         lazy = true,
-        --         keys = { "<C-b> " },
-        --         -- config = function()
-        --         --         require("plugins.config.dap")
-        --         -- end
-        --
-        -- },
+        {
+                'mfussenegger/nvim-dap',
+                name = "nvim-dap",
+                lazy = true,
+                -- keys = { "<C-b> " },
+                config = function()
+                        require("plugins.config.dap")
+                end
+
+        },
         {
                 'kevinhwang91/nvim-ufo',
                 name = "nvim-ufo",
