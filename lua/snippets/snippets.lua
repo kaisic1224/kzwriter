@@ -33,5 +33,18 @@ ls.add_snippets("c", {
                         '}', })
         }, {
                 key = "c"
-        })
+        }),
+        s("ah", {
+                t({ '#include <stdio.h>',
+                        '#include <assert.h>',
+                        '',
+                        'int main(void) {',
+                        '      ' }),
+                i(1),
+                t({ '', '',
+                        '      return 0;',
+                        '}', })
+        }, {
+                key = "c"
+        }),
 })
