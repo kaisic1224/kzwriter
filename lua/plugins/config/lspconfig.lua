@@ -40,9 +40,14 @@ lspconfig.tsserver.setup {
         capabilities = capabilities
 }
 
--- lspconfig.volar.setup {
---         filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
--- }
+lspconfig.volar.setup {
+        filetypes = { 'vue', 'json' }
+        -- init_options = {
+        --         typescript = {
+        --                 tsdk = '/lib/node_modules/typescript/lib'
+        --         }
+        -- }
+}
 
 lspconfig.tailwindcss.setup {
         on_attach = lsp_attach,
