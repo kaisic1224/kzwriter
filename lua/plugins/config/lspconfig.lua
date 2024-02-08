@@ -35,7 +35,7 @@ end
 
 lspconfig.tsserver.setup {
         on_attach = lsp_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte" },
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte", "javascript" },
         cmd = { "typescript-language-server", "--stdio" },
         capabilities = capabilities
 }
