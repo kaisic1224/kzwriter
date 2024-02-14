@@ -41,7 +41,9 @@ lspconfig.tsserver.setup {
 }
 
 lspconfig.volar.setup {
-        filetypes = { 'vue', 'json' }
+        on_attach = lsp_attach,
+        filetypes = { 'vue', 'json' },
+        capabilities = capabilities
         -- init_options = {
         --         typescript = {
         --                 tsdk = '/lib/node_modules/typescript/lib'
