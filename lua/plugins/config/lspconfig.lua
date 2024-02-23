@@ -53,7 +53,7 @@ lspconfig.volar.setup {
 
 lspconfig.tailwindcss.setup {
         on_attach = lsp_attach,
-        filetypes = { "typescriptreact", "typescript.tsx", "css", "svelte" },
+        filetypes = { "typescriptreact", "typescript.tsx", "css", "svelte", "vue" },
         root_dir = lspconfig.util.root_pattern('tailwind.config.js', 'postcss.config.js'),
         cmd = { "tailwindcss-language-server", "--stdio" },
         capabilities = capabilities
