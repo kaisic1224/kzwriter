@@ -266,6 +266,13 @@ lazy.setup({
         --                 require("plugins.config.nvim-lint")
         --         end
         -- },
+        {
+                "stevearc/conform.nvim",
+                name = "conform.nvim",
+                config = function()
+                        require("plugins.config.formatter")
+                end
+        },
         -- {
         --         'mhartington/formatter.nvim',
         --         name = 'formatter',
