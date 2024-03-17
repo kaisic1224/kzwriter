@@ -1,12 +1,19 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
         -- A list of parser names, or "all" (the four listed parsers should always be installed)
         ensure_installed = {
-                "rust", 
-                "typescript", 
-                "javascript", 
+                "rust",
+                "typescript",
+                "javascript",
                 "html",
                 "css",
-                "tsx"
+                "tsx",
+                "dockerfile",
+                "yaml",
+                "json",
+                "python",
+                "sql",
+                "vue",
+
         },
         -- Install parsers synchronously (only applied to `ensure_installed`)
         -- Automatically install missing parsers when entering buffer
