@@ -48,3 +48,14 @@ ls.add_snippets("c", {
                 key = "c"
         }),
 })
+
+ls.add_snippets("java", {
+        s("main", {
+                t({ 'public static void main(String[] args) {',
+                        '      ' }),
+                i(1),
+                t({ '', '}' })
+        }, {
+                key = "java"
+        })
+})
