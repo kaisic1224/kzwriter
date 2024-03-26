@@ -25,6 +25,12 @@ end
 vim.g.netrw_banner = 0;
 vim.g.vimtex_view_method = 'zathura'
 vim.cmd('filetype plugin indent on')
+-- disable language provider support (lua and vimscript plugins only)
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
 -- cmp
 set_option("completeopt", "menu,menuone,noinsert")
 set_option('shortmess', vim.o.shortmess .. 'c')
