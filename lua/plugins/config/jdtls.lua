@@ -38,9 +38,9 @@ local config = {
         root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
         init_options = {
                 bundles = {
-                        -- vim.fn.glob(
-                        -- "path/to/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
-                        --         1)
+                        vim.fn.glob(
+                                "path/to/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
+                                1)
                 }
         },
 }
