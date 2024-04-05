@@ -23,6 +23,7 @@ map('n', '<A-k>', ':move -2 <CR>')
 -- Visual mode other keys
 -- moving highlighted block of text
 map('x', '<A-j>', '$o0djp1v')
+-- map('x', '<A-k', '$o0dkkp1v')
 -- surrounding in quotes
 map('x', '<S-s>', ':s/\\%V\\(.*\\)\\%V/"\\1"/<CR>')
 map('x', '(', ':s/\\%V\\(.*\\)\\%V/(\\1)/<CR>')

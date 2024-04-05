@@ -24,6 +24,7 @@ local lsp_attach = function(client, buf)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf })
         -- vim.keymap.set("n", "<leader>fs", vim.lsp.buf.document_symbol, { buffer = buf })
 
+        -- conform now handles this
         -- if client.server_capabilities.documentFormattingProvider then
         --         vim.api.nvim_command [[augroup Format]]
         --         vim.api.nvim_command [[autocmd! * <buffer>]]

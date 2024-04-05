@@ -1,5 +1,9 @@
+local M = require("plugins.config.lspconfig")
+
+local home = os.getenv("HOME")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = '/home/vincent/Documents/endgame' .. project_name
+local workspace_path = home .. "/.local/share/jdtls/"
+local workspace_dir = workspace_path .. project_name
 
 local config = {
         cmd = {
@@ -39,9 +43,14 @@ local config = {
         init_options = {
                 bundles = {
                         vim.fn.glob(
-                                "path/to/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
+                                "/home/vincent/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/0.52.0/com.microsoft.java.debug.plugin-0.52.0.jar",
                                 1)
                 }
         },
+        capabilities = M.capabilities,
+        on_attach = function(client, buf)
+                M.on_attach(client, buf)
+        end,
 }
+
 require('jdtls').start_or_attach(config)

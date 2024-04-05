@@ -1,3 +1,5 @@
+local M = {};
+
 local set_option = function(option, value)
         if type(vim.o[option]) == 'boolean' then
                 vim.o[option] = value
@@ -67,3 +69,8 @@ set_option('autoindent', true)
 set_buffer_option('autoindent', true)
 set_option('expandtab', true)
 set_buffer_option('expandtab', true)
+-- export the functions
+M.set_option = set_option;
+M.set_buffer_option = set_buffer_option;
+M.set_window_option = set_window_option;
+return M

@@ -269,7 +269,6 @@ lazy.setup({
         {
                 'mfussenegger/nvim-jdtls',
                 lazy = true,
-                ft = { "java" },
                 config = function()
                         require("plugins.config.jdtls")
                 end
