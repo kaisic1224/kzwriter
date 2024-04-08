@@ -1,3 +1,4 @@
+local export = {}
 local M = require("plugins.config.lspconfig")
 
 local home = os.getenv("HOME")
@@ -39,7 +40,7 @@ local config = {
                 -- See `data directory configuration` section in the README
                 '-data', workspace_dir
         },
-        root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+        root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
         init_options = {
                 bundles = {
                         vim.fn.glob(
@@ -53,4 +54,7 @@ local config = {
         end,
 }
 
-require('jdtls').start_or_attach(config)
+-- require('jdtls').start_or_attach(config)
+export.config = config
+
+return export

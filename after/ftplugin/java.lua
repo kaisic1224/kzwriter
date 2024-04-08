@@ -1,5 +1,4 @@
 local m = require("core.options")
+local jdt_config = require("plugins.config.jdtls")
 
-require("plugins.config.jdtls")
-
--- m.set_option()
+require('jdtls').start_or_attach(jdt_config.config)
