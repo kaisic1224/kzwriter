@@ -51,13 +51,14 @@ map('n', '<leader>x', '<C-w>c')
 
 -- Debugging
 map('n', '<C-b>', ':DapToggleBreakpoint<CR>')
+map('n', '<leader>c', ':DapContinue<CR>')
 map('n', '<leader>dx', ':DapTerminate<CR>')
 map('n', '<leader>do', ':DapStepOver<CR>')
 map('n', '<leader>dt',
         ':lua local widgets = require("dap.ui.widgets"); local sidebar = widgets.sidebar(widgets.scopes); sidebar.open()<CR>')
 
 -- Trouble nvim
-map('n', '<leader>xd', ':TroubleToggle quickfix<CR>')
+-- map('n', '<leader>xd', ':TroubleToggle quickfix<CR>')
 
 -- Debugging
 map('n', "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>")

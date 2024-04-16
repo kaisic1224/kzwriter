@@ -1,10 +1,27 @@
 local export = {}
 local M = require("plugins.config.lspconfig")
 
+local path_to_jdtls = "/usr/share/java/jdtls"
 local home = os.getenv("HOME")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_path = home .. "/.local/share/jdtls/"
 local workspace_dir = workspace_path .. project_name
+
+local path_to_jar = vim.fn.glob(path_to_jdtls .. '/plugins/org.eclipse.equinox.launcher_*\\.jar')
+local path_to_config = path_to_jdtls .. '/config_linux'
+
+local extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
+local bundles = {
+        vim.fn.glob(
+                "/home/vincent/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/.*/com.microsoft.java.debug.plugin-*.jar",
+                1)
+};
+
+-- This is the new part
+-- add vscode-java test suite
+-- vim.list_extend(bundles, vim.split(vim.fn.glob("/path/to/microsoft/vscode-java-test/server/*.jar", 1), "\n"))
 
 local config = {
         cmd = {
@@ -23,14 +40,14 @@ local config = {
                 '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
                 -- 💀
-                '-jar', '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar',
+                '-jar', path_to_jar,
                 -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
                 -- Must point to the                                                     Change this to
                 -- eclipse.jdt.ls installation                                           the actual version
 
 
                 -- 💀
-                '-configuration', '/usr/share/java/jdtls/config_linux',
+                '-configuration', path_to_config,
                 -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
                 -- Must point to the                      Change to one of `linux`, `win` or `mac`
                 -- eclipse.jdt.ls installation            Depending on your system.
@@ -41,17 +58,14 @@ local config = {
                 '-data', workspace_dir
         },
         root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
-        init_options = {
-                bundles = {
-                        vim.fn.glob(
-                                "/home/vincent/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/0.52.0/com.microsoft.java.debug.plugin-0.52.0.jar",
-                                1)
-                }
-        },
-        capabilities = M.capabilities,
         on_attach = function(client, buf)
                 M.on_attach(client, buf)
         end,
+        capabilities = M.capabilities,
+        init_options = {
+                bundles = bundles,
+                extendedClientCapabilities = extendedClientCapabilities
+        },
 }
 
 -- require('jdtls').start_or_attach(config)
