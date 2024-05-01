@@ -72,8 +72,8 @@ lazy.setup({
                 end
         },
         {
-                name = "rustaceanvim",
                 'mrcjkb/rustaceanvim',
+                name = "rustaceanvim",
                 version = '^4',
                 dependencies = {
                         "nvim-lua/plenary.nvim",
@@ -253,7 +253,7 @@ lazy.setup({
                 'windwp/nvim-ts-autotag',
                 name = "ts-autotag",
                 lazy = true,
-                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte" },
+                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte", "xml", "php" },
                 config = function()
                         require('nvim-ts-autotag').setup()
                 end
@@ -274,6 +274,8 @@ lazy.setup({
         {
                 "stevearc/conform.nvim",
                 name = "conform.nvim",
+                lazy = true,
+                ft = { "python", "javscript", "javascriptreact", "typescriptreact", "jsx" },
                 config = function()
                         require("plugins.config.formatter")
                 end
