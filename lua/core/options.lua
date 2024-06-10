@@ -1,7 +1,7 @@
 local M = {};
 
 local set_option = function(option, value)
-        if type(vim.o[option]) == 'boolean' then
+        if type(vim.o[option]) == 'boolean' or type(vim.o[option]) == 'number' then
                 vim.o[option] = value
         else
                 vim.o[option] = tostring(value)
@@ -9,7 +9,7 @@ local set_option = function(option, value)
 end
 
 local set_buffer_option = function(option, value)
-        if type(vim.bo[option]) == 'boolean' then
+        if type(vim.bo[option]) == 'boolean' or type(vim.o[option]) == 'number' then
                 vim.bo[option] = value
         else
                 vim.bo[option] = tostring(value)
@@ -17,13 +17,14 @@ local set_buffer_option = function(option, value)
 end
 
 local set_window_option = function(option, value)
-        if type(vim.wo[option]) == 'boolean' then
+        if type(vim.wo[option]) == 'boolean' or type(vim.o[option]) == 'number' then
                 vim.wo[option] = value
         else
                 vim.wo[option] = tostring(value)
         end
 end
 
+vim.g.mapleader = " "
 vim.g.netrw_banner = 0;
 vim.g.vimtex_view_method = 'zathura'
 vim.cmd('filetype plugin indent on')
@@ -44,12 +45,12 @@ set_option('splitbelow', true)
 set_option('splitright', true)
 set_option('termguicolors', true)
 set_option('conceallevel', 0)
-set_option('showtabline', 2)
+set_option('showtabline', 0)
 set_option('showmode', false)
 set_option('backup', false)
 set_option('writebackup', false)
 set_option('updatetime', 300)
-set_option('timeoutlen', 100)
+set_option('timeoutlen', 750)
 set_option('clipboard', "unnamedplus")
 set_option('hlsearch', false)
 set_option('ignorecase', true)
