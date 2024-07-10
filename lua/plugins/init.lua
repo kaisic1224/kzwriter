@@ -26,15 +26,15 @@ lazy.setup({
         --                vim.cmd('colorscheme rose-pine')
         --        end
         -- },
-        {
-                'catppuccin/nvim',
-                name = 'catppuccin',
-                lazy = false,
-                priority = 1000,
-                config = function()
-                        vim.cmd('colorscheme catppuccin-mocha')
-                end
-        },
+        -- {
+        --         'catppuccin/nvim',
+        --         name = 'catppuccin',
+        --         lazy = false,
+        --         priority = 1000,
+        --         config = function()
+        --                 vim.cmd('colorscheme catppuccin-mocha')
+        --         end
+        -- },
 
         -- Autopairings --
         {
@@ -71,19 +71,19 @@ lazy.setup({
                         require("plugins.config.lspconfig")
                 end
         },
-        {
-                'mrcjkb/rustaceanvim',
-                name = "rustaceanvim",
-                version = '^4',
-                dependencies = {
-                        "nvim-lua/plenary.nvim",
-                        "mfussenegger/nvim-dap"
-                },
-                ft = { "rust" },
-                config = function()
-                        require("plugins.config.rust-tools")
-                end
-        },
+        -- {
+        --         'mrcjkb/rustaceanvim',
+        --         name = "rustaceanvim",
+        --         version = '^4',
+        --         dependencies = {
+        --                 "nvim-lua/plenary.nvim",
+        --                 "mfussenegger/nvim-dap"
+        --         },
+        --         ft = { "rust" },
+        --         config = function()
+        --                 require("plugins.config.rust-tools")
+        --         end
+        -- },
         -- {
         --         "folke/trouble.nvim",
         --         name = "trouble",
@@ -249,15 +249,15 @@ lazy.setup({
         --                 require("plugins.config.null-ls")
         --         end
         -- },
-        {
-                'windwp/nvim-ts-autotag',
-                name = "ts-autotag",
-                lazy = true,
-                ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte", "xml", "php" },
-                config = function()
-                        require('nvim-ts-autotag').setup()
-                end
-        },
+        -- {
+        --         'windwp/nvim-ts-autotag',
+        --         name = "ts-autotag",
+        --         lazy = true,
+        --         ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte", "xml", "php" },
+        --         config = function()
+        --                 require('nvim-ts-autotag').setup()
+        --         end
+        -- },
         -- {
         --         'mfussenegger/nvim-lint',
         --         name = 'nvim-lint',
@@ -266,11 +266,11 @@ lazy.setup({
         --                 require("plugins.config.nvim-lint")
         --         end
         -- },
-        {
-                'mfussenegger/nvim-jdtls',
-                dependencies = { "mfussenegger/nvim-dap" },
-                lazy = true,
-        },
+        -- {
+        --         'mfussenegger/nvim-jdtls',
+        --         dependencies = { "mfussenegger/nvim-dap" },
+        --         lazy = true,
+        -- },
         {
                 "stevearc/conform.nvim",
                 name = "conform.nvim",
@@ -294,16 +294,21 @@ lazy.setup({
         --                 require("plugins.config.icons")
         --         end
         -- }
+        -- {
+        --         'lervag/vimtex',
+        --         name = 'vimtex',
+        --         config = function()
+        --                 require("plugins.config.vimtex")
+        --         end,
+        --         ft = { "tex" },
+        -- },
         {
-                'lervag/vimtex',
-                name = 'vimtex',
-                config = function()
-                        require("plugins.config.vimtex")
-                end,
-                ft = { "tex" },
+            'williamboman/mason.nvim',
+            name = 'mason',
+            config = function()
+                require("plugins.config.mason")
+            end,
         }
-
-
 }, {
         performance = {
                 rtp = {
