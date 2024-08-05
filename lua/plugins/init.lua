@@ -158,7 +158,6 @@ lazy.setup({
                 config = function()
                         require('Comment').setup {}
                 end
-
         },
         -- better escape --
         {
@@ -211,15 +210,15 @@ lazy.setup({
                         require("plugins.config.treesitter")
                 end
         },
-        {
-                'nvim-treesitter/nvim-treesitter-context',
-                name = 'treesitter-context',
-                event = { "BufNewFile", "BufReadPre" },
-                lazy = true,
-                config = function()
-                        require('treesitter-context').setup {}
-                end,
-        },
+        -- {
+        --         'nvim-treesitter/nvim-treesitter-context',
+        --         name = 'treesitter-context',
+        --         event = { "BufNewFile", "BufReadPre" },
+        --         lazy = true,
+        --         config = function()
+        --                 require('treesitter-context').setup {}
+        --         end,
+        -- },
 
         -- Statusline (staline) --
         -- {
