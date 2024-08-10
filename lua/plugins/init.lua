@@ -307,6 +307,7 @@ lazy.setup({
             config = function()
                 require("plugins.config.mason")
             end,
+            cmd = { "Mason" }
         }
 }, {
         performance = {

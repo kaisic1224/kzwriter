@@ -10,30 +10,30 @@ local r = ls.restore_node
 
 
 ls.add_snippets("c", {
-        s("cso", {
-                t({ '#include "cs136.h"',
-                        '',
-                        'int main(void) {',
-                        '      ' }),
-                i(1),
-                t({ '', '',
-                        '      return 0;',
-                        '}', })
-        }, {
-                key = "c"
-        }),
-        s("cst", {
-                t({ '#include "cs136-trace.h"',
-                        '',
-                        'int main(void) {',
-                        '      ' }),
-                i(1),
-                t({ '', '',
-                        '      return 0;',
-                        '}', })
-        }, {
-                key = "c"
-        }),
+        -- s("cso", {
+        --         t({ '#include "cs136.h"',
+        --                 '',
+        --                 'int main(void) {',
+        --                 '      ' }),
+        --         i(1),
+        --         t({ '', '',
+        --                 '      return 0;',
+        --                 '}', })
+        -- }, {
+        --         key = "c"
+        -- }),
+        -- s("cst", {
+        --         t({ '#include "cs136-trace.h"',
+        --                 '',
+        --                 'int main(void) {',
+        --                 '      ' }),
+        --         i(1),
+        --         t({ '', '',
+        --                 '      return 0;',
+        --                 '}', })
+        -- }, {
+        --         key = "c"
+        -- }),
         s("ah", {
                 t({ '#include <stdio.h>',
                         '#include <assert.h>',

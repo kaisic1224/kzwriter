@@ -9,7 +9,6 @@ map('i', '<C-h>', '<Left>')
 map('i', '<C-j>', '<Down>')
 map('i', '<C-k>', '<Up>')
 map('i', '<C-l>', '<Right>')
-map('i', '<C-b>', '<ESC>^i')
 map('i', '<C-e>', '<End>')
 
 -- Normal mode other keys
@@ -20,11 +19,11 @@ map('n', '<A-k>', ':move -2 <CR>')
 
 -- Visual mode other keys
 -- moving highlighted block of text
-map('x', '<A-j>', '$o0djp1v')
+-- map('x', '<A-j>', '$o0djp1v')
 -- map('x', '<A-k', '$o0dkkp1v')
 -- surrounding in quotes
-map('x', '<S-s>', ':s/\\%V\\(.*\\)\\%V/"\\1"/<CR>')
-map('x', '(', ':s/\\%V\\(.*\\)\\%V/(\\1)/<CR>')
+-- map('x', '<S-s>', ':s/\\%V\\(.*\\)\\%V/"\\1"/<CR>')
+-- map('x', '(', ':s/\\%V\\(.*\\)\\%V/(\\1)/<CR>')
 
 -- Bufferline
 map('n', '<TAB>', ':bnext<CR>')
@@ -35,8 +34,8 @@ map('n', '<S-TAB>', ':bprevious<CR>')
 map('n', '<leader>a', ':Explore<CR>')
 
 -- TreeSitter
-map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
-map("x", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
+-- map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
+-- map("x", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 
 -- Telescope
 map('n', '<leader>F', ":Telescope find_files<CR>")
@@ -45,7 +44,7 @@ map('n', '<leader>fl', ':Telescope live_grep<CR>')
 -- Window splitting
 map('n', '<leader>v', ':vsplit<CR>')
 map('n', '<leader>h', ':split<CR>')
-map('n', '<leader>x', '<C-w>c')
+-- map('n', '<leader>x', '<C-w>c')
 
 -- Debugging
 map('n', '<C-b>', ':DapToggleBreakpoint<CR>')
