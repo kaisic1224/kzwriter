@@ -168,12 +168,12 @@ lazy.setup({
                         require("plugins.config.better-escape")
                 end
         },
-        {
-                "mg979/vim-visual-multi",
-                name = "visual-multi",
-                lazy = true,
-                keys = { "<C-n>", desc = "visual-multi" },
-        },
+        -- {
+        --         "mg979/vim-visual-multi",
+        --         name = "visual-multi",
+        --         lazy = true,
+        --         keys = { "<C-n>", desc = "visual-multi" },
+        -- },
 
         -- Nvim tree file viewer --
 
@@ -274,7 +274,7 @@ lazy.setup({
                 "stevearc/conform.nvim",
                 name = "conform.nvim",
                 lazy = true,
-                ft = { "python", "javscript", "javascriptreact", "typescriptreact", "jsx" },
+                ft = { "python", "javscript", "javascriptreact", "typescriptreact", "jsx", "c", "rust" },
                 config = function()
                         require("plugins.config.formatter")
                 end
@@ -307,7 +307,7 @@ lazy.setup({
             config = function()
                 require("plugins.config.mason")
             end,
-            cmd = { "Mason" }
+            -- cmd = { "Mason" }
         }
 }, {
         performance = {
