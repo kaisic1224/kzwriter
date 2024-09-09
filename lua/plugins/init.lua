@@ -160,14 +160,14 @@ lazy.setup({
                 end
         },
         -- better escape --
-        {
-                "max397574/better-escape.nvim",
-                name = "better-escape",
-                lazy = false,
-                config = function()
-                        require("plugins.config.better-escape")
-                end
-        },
+        -- {
+        --         "max397574/better-escape.nvim",
+        --         name = "better-escape",
+        --         lazy = false,
+        --         config = function()
+        --                 require("plugins.config.better-escape")
+        --         end
+        -- },
         -- {
         --         "mg979/vim-visual-multi",
         --         name = "visual-multi",
