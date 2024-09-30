@@ -338,7 +338,8 @@ lazy.setup({
                                 "bugreport",
                                 "ftplugin",
                                 "shada",
-                                "spellfile"
+                                "spellfile",
+                                "editorconfig"
                         },
                 },
         },
