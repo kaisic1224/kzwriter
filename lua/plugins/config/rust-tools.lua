@@ -1,6 +1,5 @@
 local M = require("plugins.config.lspconfig")
 -- Setup rust_analyzer via rust-tools.nvim
-
 vim.g.rustaceanvim = {
         tools = {
                 inlay_hints = {

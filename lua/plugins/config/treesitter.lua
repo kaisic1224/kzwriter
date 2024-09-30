@@ -12,8 +12,7 @@ require 'nvim-treesitter.configs'.setup {
                 "json",
                 "python",
                 "sql",
-                "vue",
-
+                -- "vue",
         },
         -- Install parsers synchronously (only applied to `ensure_installed`)
         -- Automatically install missing parsers when entering buffer

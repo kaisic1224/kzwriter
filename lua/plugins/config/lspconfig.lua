@@ -34,7 +34,7 @@ local lsp_attach = function(client, buf)
 end
 
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
         on_attach = lsp_attach,
         filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte", "javascript" },
         cmd = { "typescript-language-server", "--stdio" },
@@ -136,6 +136,16 @@ lspconfig.pyright.setup {
 lspconfig.clangd.setup {
         on_attach = lsp_attach,
         capabilities = capabilities,
+}
+
+lspconfig.cssls.setup {
+    on_attach = lsp_attach,
+    capabilities = capabilities
+}
+
+lspconfig.gopls.setup {
+    on_attach = lsp_attach,
+    capabilities = capabilities
 }
 
 M.capabilities = capabilities;

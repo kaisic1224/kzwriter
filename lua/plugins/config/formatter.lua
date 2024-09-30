@@ -3,14 +3,14 @@ local conform = require("conform")
 conform.setup({
         formatters_by_ft = {
                 python = { "ruff" },
-                javascript = { { "prettierd", "prettier" } }
+                javascript = { "prettierd", "prettier", stop_after_first = true },
         },
         log_level = vim.log.levels.ERROR,
         notify_on_error = true,
-        format_on_save = {
-                lsp_fallback = true,
-                timeout_ms = 500,
-        },
+        -- format_on_save = {
+        --         lsp_fallback = true,
+        --         timeout_ms = 500,
+        -- },
 })
 
 -- conform.formatters.python = function()

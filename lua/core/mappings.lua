@@ -12,10 +12,13 @@ map('i', '<C-l>', '<Right>')
 map('i', '<C-e>', '<End>')
 
 -- Normal mode other keys
-map('n', '<C-s>', ':w <CR>')
+-- map('n', '<C-s>', ':w <CR>')
 map('n', '<C-q>', ':bd!<CR>')
-map('n', '<A-j>', ':move +1 <CR>')
-map('n', '<A-k>', ':move -2 <CR>')
+-- map('n', '<A-j>', ':move +1 <CR>')
+-- map('n', '<A-k>', ':move -2 <CR>')
+
+-- Formatting
+map('n', "<leader>gq", ":lua require('conform').format()<CR>")
 
 -- Visual mode other keys
 -- moving highlighted block of text
@@ -56,9 +59,3 @@ map('n', '<leader>dt',
 
 -- Trouble nvim
 -- map('n', '<leader>xd', ':TroubleToggle quickfix<CR>')
-
--- Debugging
-map('n', "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>")
-map('n', "<C-CR>", ":lua require'dap'.continue()<CR>")
-map('n', "<C-l>", ":lua require'dap'.step_over()<CR>")
-map('n', "<C-j>", ":lua require'dap'.step_into()<CR>")

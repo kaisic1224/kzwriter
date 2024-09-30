@@ -34,6 +34,9 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python_provider = 0
 vim.g.loaded_python3_provider = 0
+-- vim.opts.rocks.enabled = false
+-- nvim-ufo
+
 -- cmp
 set_option("completeopt", "menu,menuone,noinsert")
 set_option('shortmess', vim.o.shortmess .. 'c')

@@ -40,10 +40,12 @@ lazy.setup({
         {
                 'windwp/nvim-autopairs',
                 name = 'nvim-autopairs',
-                priority = 10000,
-                event = { "VeryLazy" },
+                event = { "InsertEnter" },
                 config = function()
-                        require("plugins.config.autopairs")
+                        require("nvim-autopairs").setup({
+                            disable_filetype = { "TelescopePrompt" , "vim" },
+                            fast_wrap = {},
+                        })
                 end
         },
 
@@ -51,11 +53,11 @@ lazy.setup({
         {
                 'hrsh7th/nvim-cmp',
                 dependencies = {
-                        'L3MON4D3/LuaSnip',
-                        'saadparwaiz1/cmp_luasnip',
+                        -- 'L3MON4D3/LuaSnip',
+                        -- 'saadparwaiz1/cmp_luasnip',
                         'hrsh7th/cmp-nvim-lsp',
                         'hrsh7th/cmp-buffer',
-                        'hrsh7th/cmp-nvim-lsp-signature-help',
+                        -- 'hrsh7th/cmp-nvim-lsp-signature-help',
                 },
                 lazy = true,
                 event = "InsertEnter",
@@ -71,19 +73,15 @@ lazy.setup({
                         require("plugins.config.lspconfig")
                 end
         },
-        -- {
-        --         'mrcjkb/rustaceanvim',
-        --         name = "rustaceanvim",
-        --         version = '^4',
-        --         dependencies = {
-        --                 "nvim-lua/plenary.nvim",
-        --                 "mfussenegger/nvim-dap"
-        --         },
-        --         ft = { "rust" },
-        --         config = function()
-        --                 require("plugins.config.rust-tools")
-        --         end
-        -- },
+        {
+                'mrcjkb/rustaceanvim',
+                name = "rustaceanvim",
+                version = '^5',
+                ft = { "rust" },
+                config = function()
+                        require("plugins.config.rust-tools")
+                end
+        },
         -- {
         --         "folke/trouble.nvim",
         --         name = "trouble",
@@ -119,8 +117,7 @@ lazy.setup({
         {
                 'mfussenegger/nvim-dap',
                 name = "nvim-dap",
-                lazy = true,
-                -- keys = { "<C-b> " },
+                cmd = { "DapToggleBreakpoint", "DapContinue", "DapTerminate" },
                 config = function()
                         require("plugins.config.dap")
                 end
@@ -130,13 +127,13 @@ lazy.setup({
                 'kevinhwang91/nvim-ufo',
                 name = "nvim-ufo",
                 dependencies = { 'kevinhwang91/promise-async' },
-                init = function()
-                        vim.o.foldcolumn = '1' -- '0' is not bad
-                        vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-                        vim.o.foldlevelstart = 99
-                        vim.o.foldenable = true
+                event = { "VeryLazy" },
+                init = function ()
+                    vim.o.foldcolumn = '1' -- '0' is not bad
+                    vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+                    vim.o.foldlevelstart = 99
+                    vim.o.foldenable = true
                 end,
-                event = { "BufReadPre", },
                 config = function()
                         require('ufo').setup({
                                 provider_selector = function(bufnr, filetype, buftype)
@@ -154,7 +151,7 @@ lazy.setup({
         -- comments
         {
                 'numToStr/Comment.nvim',
-                lazy = false,
+                event = { "BufNewFile", "BufReadPre" },
                 config = function()
                         require('Comment').setup {}
                 end
@@ -273,8 +270,8 @@ lazy.setup({
         {
                 "stevearc/conform.nvim",
                 name = "conform.nvim",
-                lazy = true,
-                ft = { "python", "javscript", "javascriptreact", "typescriptreact", "jsx", "c", "rust" },
+                -- event = { "BufNewFile", "BufReadPre" },
+                ft = { "python", "javscript", "javascriptreact", "typescriptreact", "jsx", "c", "rust", "go" },
                 config = function()
                         require("plugins.config.formatter")
                 end
@@ -293,14 +290,11 @@ lazy.setup({
         --                 require("plugins.config.icons")
         --         end
         -- }
-        -- {
-        --         'lervag/vimtex',
-        --         name = 'vimtex',
-        --         config = function()
-        --                 require("plugins.config.vimtex")
-        --         end,
-        --         ft = { "tex" },
-        -- },
+        {
+                'lervag/vimtex',
+                name = 'vimtex',
+                ft = { "tex" },
+        },
         {
             'williamboman/mason.nvim',
             name = 'mason',
@@ -343,6 +337,8 @@ lazy.setup({
                                 "compiler",
                                 "bugreport",
                                 "ftplugin",
+                                "shada",
+                                "spellfile"
                         },
                 },
         },
