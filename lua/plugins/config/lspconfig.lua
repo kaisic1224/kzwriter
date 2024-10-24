@@ -3,6 +3,7 @@ local lspconfig = require('lspconfig')
 local M = {}
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = false
 
 local lsp_attach = function(client, buf)
         -- local opts = { noremap = true, silent = true }
