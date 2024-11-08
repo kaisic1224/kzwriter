@@ -302,8 +302,14 @@ lazy.setup({
                 require("plugins.config.mason")
             end,
             -- cmd = { "Mason" }
-        }
-}, {
+        },
+    },
+    -- {
+    --     rocks = {
+    --         hererocks = false
+    --     }
+    -- },
+    {
         performance = {
                 rtp = {
                         disabled_plugins = {

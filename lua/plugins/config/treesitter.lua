@@ -3,7 +3,7 @@ require 'nvim-treesitter.configs'.setup {
         ensure_installed = {
                 "rust",
                 "typescript",
-                "javascript",
+                -- "javascript",
                 "html",
                 "css",
                 "tsx",

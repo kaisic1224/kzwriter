@@ -50,7 +50,7 @@ map('n', '<leader>h', ':split<CR>')
 -- map('n', '<leader>x', '<C-w>c')
 
 -- Debugging
-map('n', '<C-b>', ':DapToggleBreakpoint<CR>')
+map('n', '<leader>bb', ':DapToggleBreakpoint<CR>')
 map('n', '<leader>c', ':DapContinue<CR>')
 map('n', '<leader>dx', ':DapTerminate<CR>')
 map('n', '<leader>do', ':DapStepOver<CR>')
