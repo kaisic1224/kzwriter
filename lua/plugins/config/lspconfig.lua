@@ -146,7 +146,19 @@ lspconfig.cssls.setup {
 
 lspconfig.gopls.setup {
     on_attach = lsp_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotimpl" },
+    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+                unusedParams = true
+            }
+        }
+    }
 }
 
 M.capabilities = capabilities;
