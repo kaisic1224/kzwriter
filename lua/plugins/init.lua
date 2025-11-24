@@ -15,27 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 local ok, lazy = pcall(require, 'lazy')
 if not ok then return end
 lazy.setup({
-
-        -- Colorscheme --
-        -- {
-        --        'rose-pine/neovim',
-        --        name = 'rose-pine',
-        --        lazy = false,
-        --        priority = 1000,
-        --        config = function()
-        --                vim.cmd('colorscheme rose-pine')
-        --        end
-        -- },
-        -- {
-        --         'catppuccin/nvim',
-        --         name = 'catppuccin',
-        --         lazy = false,
-        --         priority = 1000,
-        --         config = function()
-        --                 vim.cmd('colorscheme catppuccin-mocha')
-        --         end
-        -- },
-
         -- Autopairings --
         {
                 'windwp/nvim-autopairs',
@@ -53,8 +32,8 @@ lazy.setup({
         {
                 'hrsh7th/nvim-cmp',
                 dependencies = {
-                        -- 'L3MON4D3/LuaSnip',
-                        -- 'saadparwaiz1/cmp_luasnip',
+                        'L3MON4D3/LuaSnip',
+                        'saadparwaiz1/cmp_luasnip',
                         'hrsh7th/cmp-nvim-lsp',
                         'hrsh7th/cmp-buffer',
                         -- 'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -74,45 +53,26 @@ lazy.setup({
                 end
         },
         {
-                'mrcjkb/rustaceanvim',
-                name = "rustaceanvim",
-                version = '^5',
-                ft = { "rust" },
+                "folke/trouble.nvim",
+                name = "trouble",
+                cmd = { "TroubleToggle" },
                 config = function()
-                        require("plugins.config.rust-tools")
+                        require('trouble').setup {
+                                icons = false,
+                                fold_open = "v",      -- icon used for open folds
+                                fold_closed = ">",    -- icon used for closed folds
+                                indent_lines = false, -- add an indent guide below the fold icons
+                                signs = {
+                                        -- icons / text used for a diagnostic
+                                        error = "error",
+                                        warning = "warn",
+                                        hint = "hint",
+                                        information = "info"
+                                },
+                                use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+                        }
                 end
         },
-        -- {
-        --         "folke/trouble.nvim",
-        --         name = "trouble",
-        --         cmd = { "TroubleToggle" },
-        --         config = function()
-        --                 require('trouble').setup {
-        --                         icons = false,
-        --                         fold_open = "v",      -- icon used for open folds
-        --                         fold_closed = ">",    -- icon used for closed folds
-        --                         indent_lines = false, -- add an indent guide below the fold icons
-        --                         signs = {
-        --                                 -- icons / text used for a diagnostic
-        --                                 error = "error",
-        --                                 warning = "warn",
-        --                                 hint = "hint",
-        --                                 information = "info"
-        --                         },
-        --                         use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-        --                 }
-        --         end
-        -- },
-        -- Bufferline --
-        -- {
-        --         'akinsho/bufferline.nvim',
-        --         name = 'bufferline',
-        --         event = { "BufWinEnter" },
-        --         priority = 1000,
-        --         config = function()
-        --                 require("plugins.config.bufferline")
-        --         end
-        -- },
         -- debugger --
         {
                 'mfussenegger/nvim-dap',
@@ -149,20 +109,11 @@ lazy.setup({
                 end
         },
         -- comments
-        {
-                'numToStr/Comment.nvim',
-                event = { "BufNewFile", "BufReadPre" },
-                config = function()
-                        require('Comment').setup {}
-                end
-        },
-        -- better escape --
         -- {
-        --         "max397574/better-escape.nvim",
-        --         name = "better-escape",
-        --         lazy = false,
+        --         'numToStr/Comment.nvim',
+        --         event = { "BufNewFile", "BufReadPre" },
         --         config = function()
-        --                 require("plugins.config.better-escape")
+        --                 require('Comment').setup {}
         --         end
         -- },
         -- {
@@ -171,18 +122,6 @@ lazy.setup({
         --         lazy = true,
         --         keys = { "<C-n>", desc = "visual-multi" },
         -- },
-
-        -- Nvim tree file viewer --
-
-        -- {
-        --         'nvim-tree/nvim-tree.lua',
-        --         name = 'nvim-tree',
-        --         cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-        --         config = function()
-        --                 require("plugins.config.nvim-tree")
-        --         end
-        -- },
-
         -- Telescope stuffs --
         {
                 'alvarosevilla95/telescope.nvim',
@@ -207,89 +146,41 @@ lazy.setup({
                         require("plugins.config.treesitter")
                 end
         },
-        -- {
-        --         'nvim-treesitter/nvim-treesitter-context',
-        --         name = 'treesitter-context',
-        --         event = { "BufNewFile", "BufReadPre" },
-        --         lazy = true,
-        --         config = function()
-        --                 require('treesitter-context').setup {}
-        --         end,
-        -- },
-
-        -- Statusline (staline) --
-        -- {
-        --         'tamton-aquib/staline.nvim',
-        --         lazy = true,
-        --         name = 'staline',
-        --         events = { "BufWinEnter" },
-        --         config = function()
-        --                 require("plugins.config.staline")
-        --         end
-        -- },
-
+        {
+                'nvim-treesitter/nvim-treesitter-context',
+                name = 'treesitter-context',
+                event = { "BufNewFile", "BufReadPre" },
+                lazy = true,
+                config = function()
+                        require('treesitter-context').setup {}
+                end,
+        },
         -- gitsigns stuffs --
-        -- {
-        --         'lewis6991/gitsigns.nvim',
-        --         name = 'gitsigns',
-        --         lazy = true,
-        --         event = { "BufWritePre", "BufReadPre" },
-        --         config = function()
-        --                 require("plugins.config.gitsigns")
-        --         end
-        -- },
-        -- {
-        --         'jose-elias-alvarez/null-ls.nvim',
-        --         lazy = false,
-        --         config = function()
-        --                 require("plugins.config.null-ls")
-        --         end
-        -- },
-        -- {
-        --         'windwp/nvim-ts-autotag',
-        --         name = "ts-autotag",
-        --         lazy = true,
-        --         ft = { "tsx", "jsx", "html", "typescriptreact", "javascriptreact", "svelte", "xml", "php" },
-        --         config = function()
-        --                 require('nvim-ts-autotag').setup()
-        --         end
-        -- },
-        -- {
-        --         'mfussenegger/nvim-lint',
-        --         name = 'nvim-lint',
-        --         ft = { "python" },
-        --         config = function()
-        --                 require("plugins.config.nvim-lint")
-        --         end
-        -- },
-        -- {
-        --         'mfussenegger/nvim-jdtls',
-        --         dependencies = { "mfussenegger/nvim-dap" },
-        --         lazy = true,
-        -- },
+        {
+                'lewis6991/gitsigns.nvim',
+                name = 'gitsigns',
+                lazy = true,
+                event = { "BufWritePre", "BufReadPre" },
+                config = function()
+                        require("plugins.config.gitsigns")
+                end
+        },
+        {
+                'mfussenegger/nvim-lint',
+                name = 'nvim-lint',
+                ft = { "python" },
+                config = function()
+                        require("plugins.config.nvim-lint")
+                end
+        },
         {
                 "stevearc/conform.nvim",
                 name = "conform.nvim",
-                -- event = { "BufNewFile", "BufReadPre" },
-                ft = { "python", "javscript", "javascriptreact", "typescriptreact", "jsx", "c", "rust", "go" },
+                event = { "BufNewFile", "BufReadPre" },
                 config = function()
                         require("plugins.config.formatter")
                 end
         },
-        -- {
-        --         'mhartington/formatter.nvim',
-        --         name = 'formatter',
-        --         config = function()
-        --                 require("plugins.config.formatter")
-        --         end
-        -- }
-        -- {
-        --         'nvim-tree/nvim-web-devicons',
-        --         lazy = true,
-        --         config = function()
-        --                 require("plugins.config.icons")
-        --         end
-        -- }
         {
                 'lervag/vimtex',
                 name = 'vimtex',
@@ -304,11 +195,6 @@ lazy.setup({
             -- cmd = { "Mason" }
         },
     },
-    -- {
-    --     rocks = {
-    --         hererocks = false
-    --     }
-    -- },
     {
         performance = {
                 rtp = {

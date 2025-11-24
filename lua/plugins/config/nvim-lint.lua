@@ -11,15 +11,8 @@ end
 
 lint.linters_by_ft = {
         python = {
-                -- 'mypy',
-                -- 'ruff'
+                'ruff'
         }
-}
-
-local mypy = lint.linters.mypy
-mypy.args = {
-        '--python-executable',
-        py_path
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {

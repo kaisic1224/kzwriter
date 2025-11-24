@@ -1,166 +1,92 @@
-local lspconfig = require('lspconfig')
--- Setup buffer-local keymaps / options for LSP buffers
+-- local lspconfig = require('lspconfig'
+
 local M = {}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Capabilities (cmp-nvim-lsp)
+local capabilities = require("cmp_nvim_lsp").default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 capabilities.textDocument.completion.completionItem.snippetSupport = false
 
-local lsp_attach = function(client, buf)
-        -- local opts = { noremap = true, silent = true }
-        -- Example maps, set your own with vim.api.nvim_buf_set_keymap(buf, "n", <lhs>, <rhs>, { desc = <desc> })
-        -- or a plugin like which-key.nvim
-        -- <lhs>        <rhs>                        <desc>
-        -- "K"          vim.lsp.buf.hover            "Hover Info"
-        -- "<leader>qf" vim.diagnostic.setqflist     "Quickfix Diagnostics"
-        -- "[d"         vim.diagnostic.goto_prev     "Previous Diagnostic"
-        -- "]d"         vim.diagnostic.goto_next     "Next Diagnostic"
-        -- "<leader>e"  vim.diagnostic.open_float    "Explain Diagnostic"
-        -- "<leader>ca" vim.lsp.buf.code_action      "Code Action"
-        -- "<leader>cr" vim.lsp.buf.rename           "Rename Symbol"
-        -- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
-        -- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
-        -- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = buf })
-        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { buffer = buf })
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf })
-        -- vim.keymap.set("n", "<leader>fs", vim.lsp.buf.document_symbol, { buffer = buf })
-
-        -- conform now handles this
-        -- if client.server_capabilities.documentFormattingProvider then
-        --         vim.api.nvim_command [[augroup Format]]
-        --         vim.api.nvim_command [[autocmd! * <buffer>]]
-        --         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-        --         vim.api.nvim_command [[autogroup END]]
-        -- end
+-- Buffer-local LSP mappings
+local function lsp_attach(client, buf)
+  -- Example keymaps; tweak as you like
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = buf })
+  vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { buffer = buf })
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf })
 end
 
+---------------------------------------------------------------------
+-- Global defaults for ALL servers (merged with server-specific config)
+---------------------------------------------------------------------
+vim.lsp.config("*", {
+  capabilities = capabilities,
+  on_attach = lsp_attach,
+})
 
-lspconfig.ts_ls.setup {
-        on_attach = lsp_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte", "javascript" },
-        cmd = { "typescript-language-server", "--stdio" },
-        capabilities = capabilities
-}
+---------------------------------------------------------------------
+-- Server-specific configs
+---------------------------------------------------------------------
 
--- lspconfig.volar.setup {
---         on_attach = lsp_attach,
---         filetypes = { 'vue', 'json' },
---         capabilities = capabilities
---         -- init_options = {
---         --         typescript = {
---         --                 tsdk = '/lib/node_modules/typescript/lib'
---         --         }
---         -- }
--- }
+vim.lsp.config("lua_ls", {
+  filetypes = { "lua" },
+  settings = {
+    Lua = {
+      format = {
+        enable = true,
+        -- NOTE: values must be strings for lua_ls defaultConfig
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        },
+      },
+    },
+  },
+})
 
-lspconfig.tailwindcss.setup {
-        on_attach = lsp_attach,
-        filetypes = { "typescriptreact", "typescript.tsx", "css", "svelte", "vue" },
-        root_dir = lspconfig.util.root_pattern('tailwind.config.js', 'postcss.config.js'),
-        cmd = { "tailwindcss-language-server", "--stdio" },
-        capabilities = capabilities
-}
+vim.lsp.config("pyright", {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        autoSearchPaths = true,
+        diagnosticMode = "openFilesOnly",
+        useLibraryCodeForTypes = true,
+      },
+      pythonPath = vim.fn.exepath("python3"),
+    },
+  },
+})
 
-lspconfig.svelte.setup {
-        on_attach = lsp_attach,
-        filetypes = { "svelte" },
-        cmd = { "svelteserver", "--stdio" },
-        capabilities = capabilities
-}
+vim.lsp.config("clangd", {
+  -- extra clangd-specific settings can go here if you want
+})
 
-lspconfig.lua_ls.setup {
-        on_attach = lsp_attach,
-        capabilities = capabilities,
-        filetypes = { "lua" },
-        settings = {
-                Lua = {
-                        format = {
-                                enable = true,
-                                -- Put format options here
-                                -- NOTE: the value should be STRING!!
-                                defaultConfig = {
-                                        indent_style = "space",
-                                        indent_size = "2",
-                                }
-                        },
-                }
-        }
-}
+vim.lsp.config("gopls", {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  -- Equivalent to old root_pattern("go.work", "go.mod", ".git")
+  root_markers = { "go.work", "go.mod", ".git" },
+  settings = {
+    gopls = {
+      completeUnimported = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedParams = true,
+      },
+    },
+  },
+})
 
--- local function get_python_path(path)
---         conda = vim.env.CONDA_PREFIX
---         if conda then
---                 return path .. path.join(conda, "lib", "python3.11", "site-packages")
---         end
--- end
+---------------------------------------------------------------------
+-- Enable the configs
+---------------------------------------------------------------------
+for _, server in ipairs({ "lua_ls", "pyright", "clangd", "gopls" }) do
+  vim.lsp.enable(server)
+end
 
+-- M.capabilities = capabilities
+-- M.on_attach = lsp_attach
 
--- lspconfig.pylsp.setup {
---         before_init = function(_, config)
---                 config.settings.python.pythonPath = get_python_path('/home/vincent/miniconda3/envs/nvim/bin/pylsp:')
---                 vim.g.python3_host_prog = '/home/vincent/miniconda3/envs/nvim/bin/python'
---         end,
---         on_attach = lsp_attach,
---         capabilities = capabilities,
---         filetypes = { "python" },
---         cmd = { "/home/vincent/miniconda3/envs/nvim/bin/pylsp" },
---         settings = {
---                 pylsp = {
---                         plugins = {
---                                 pycodestyle = {
---                                         ignore = { 'W391' },
---                                         maxLineLength = 140
---                                 },
---                                 jedi_completion = { fuzzy = true },
---                         }
---                 }
---         }
--- }
-
-lspconfig.pyright.setup {
-        on_attach = lsp_attach,
-        capabilities = capabilities,
-        cmd = { "/home/vincent/miniconda3/envs/nvim/bin/pyright-langserver", "--stdio" },
-        settings = {
-                python = {
-                        analysis = {
-                                typeCheckingMode = "basic",
-                                autoSearchPaths = true,
-                                diagnosticMode = "openFilesOnly",
-                                useLibraryCodeForTypes = true
-                        },
-                        pythonPath = vim.fn.exepath("python3")
-                }
-        }
-}
-
-lspconfig.clangd.setup {
-        on_attach = lsp_attach,
-        capabilities = capabilities,
-}
-
-lspconfig.cssls.setup {
-    on_attach = lsp_attach,
-    capabilities = capabilities
-}
-
-lspconfig.gopls.setup {
-    on_attach = lsp_attach,
-    capabilities = capabilities,
-    cmd = { "gopls" },
-    filetypes = { "go", "gomod", "gowork", "gotimpl" },
-    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-    settings = {
-        gopls = {
-            completeUnimported = true,
-            usePlaceholders = true,
-            analyses = {
-                unusedParams = true
-            }
-        }
-    }
-}
-
-M.capabilities = capabilities;
-M.on_attach = lsp_attach;
 return M
+

@@ -5,10 +5,10 @@ local map = function(mode, lhs, rhs, opts)
 end
 
 -- Navigation keys in insert mode
-map('i', '<C-h>', '<Left>')
-map('i', '<C-j>', '<Down>')
-map('i', '<C-k>', '<Up>')
-map('i', '<C-l>', '<Right>')
+-- map('i', '<C-h>', '<Left>')
+-- map('i', '<C-j>', '<Down>')
+-- map('i', '<C-k>', '<Up>')
+-- map('i', '<C-l>', '<Right>')
 -- map('i', '<C-e>', '<End>')
 
 -- Normal mode other keys
@@ -37,7 +37,7 @@ map('n', '<S-TAB>', ':bprevious<CR>')
 map('n', '<leader>a', ':Explore<CR>')
 
 -- TreeSitter
--- map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
+map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 -- map("x", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 
 -- Telescope
