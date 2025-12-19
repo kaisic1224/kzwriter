@@ -34,9 +34,6 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python_provider = 0
 vim.g.loaded_python3_provider = 0
--- vim.opts.rocks.hererocks = false
--- vim.o.rocks.enabled = false
--- nvim-ufo
 
 -- cmp
 set_option("completeopt", "menu,menuone,noinsert")
@@ -47,7 +44,7 @@ set_option('cmdheight', 1)
 set_option('whichwrap', 'b,s,<,>,[,[,h,l')
 set_option('splitbelow', true)
 set_option('splitright', true)
-set_option('termguicolors', true)
+-- set_option('termguicolors', true)
 set_option('conceallevel', 0)
 set_option('showtabline', 0)
 set_option('showmode', false)

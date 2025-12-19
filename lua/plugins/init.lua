@@ -55,7 +55,7 @@ lazy.setup({
         {
                 "folke/trouble.nvim",
                 name = "trouble",
-                cmd = { "TroubleToggle" },
+                cmd = { "Trouble" },
                 config = function()
                         require('trouble').setup {
                                 icons = false,
@@ -108,14 +108,6 @@ lazy.setup({
                         })
                 end
         },
-        -- comments
-        -- {
-        --         'numToStr/Comment.nvim',
-        --         event = { "BufNewFile", "BufReadPre" },
-        --         config = function()
-        --                 require('Comment').setup {}
-        --         end
-        -- },
         -- {
         --         "mg979/vim-visual-multi",
         --         name = "visual-multi",
@@ -146,15 +138,15 @@ lazy.setup({
                         require("plugins.config.treesitter")
                 end
         },
-        {
-                'nvim-treesitter/nvim-treesitter-context',
-                name = 'treesitter-context',
-                event = { "BufNewFile", "BufReadPre" },
-                lazy = true,
-                config = function()
-                        require('treesitter-context').setup {}
-                end,
-        },
+        -- {
+        --         'nvim-treesitter/nvim-treesitter-context',
+        --         name = 'treesitter-context',
+        --         event = { "BufNewFile", "BufReadPre" },
+        --         lazy = true,
+        --         config = function()
+        --                 require('treesitter-context').setup {}
+        --         end,
+        -- },
         -- gitsigns stuffs --
         {
                 'lewis6991/gitsigns.nvim',
@@ -194,6 +186,13 @@ lazy.setup({
             end,
             -- cmd = { "Mason" }
         },
+        {
+            "kylechui/nvim-surround",
+            name = "nvim-surround",
+            config = function()
+                require("nvim-surround").setup({})
+            end
+        }
     },
     {
         performance = {

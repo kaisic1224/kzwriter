@@ -16,6 +16,7 @@ end
 map('n', '<C-q>', ':bd!<CR>')
 -- map('n', '<A-j>', ':move +1 <CR>')
 -- map('n', '<A-k>', ':move -2 <CR>')
+map('n', '<leader>e', ':lua vim.diagnostic.open_float(0, { scope = "line" })<CR>')
 
 -- Formatting
 map('n', "<leader>gq", ":lua require('conform').format()<CR>")
@@ -37,12 +38,13 @@ map('n', '<S-TAB>', ':bprevious<CR>')
 map('n', '<leader>a', ':Explore<CR>')
 
 -- TreeSitter
-map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
+-- map("n", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 -- map("x", "[c", ":lua require('treesitter-context').go_to_context()<CR>")
 
 -- Telescope
 map('n', '<leader>F', ":Telescope find_files<CR>")
 map('n', '<leader>fl', ':Telescope live_grep<CR>')
+map('n', 'vrr', ':Telescope lsp_references<CR>')
 
 -- Window splitting
 map('n', '<leader>v', ':vsplit<CR>')
@@ -51,11 +53,11 @@ map('n', '<leader>h', ':split<CR>')
 
 -- Debugging
 map('n', '<leader>bb', ':DapToggleBreakpoint<CR>')
-map('n', '<leader>c', ':DapContinue<CR>')
+map('n', '<leader>bc', ':DapContinue<CR>')
 map('n', '<leader>dx', ':DapTerminate<CR>')
 map('n', '<leader>do', ':DapStepOver<CR>')
 map('n', '<leader>dt',
         ':lua local widgets = require("dap.ui.widgets"); local sidebar = widgets.sidebar(widgets.scopes); sidebar.open()<CR>')
 
 -- Trouble nvim
--- map('n', '<leader>xd', ':TroubleToggle quickfix<CR>')
+map('n', '<leader>xd', ':Trouble quickfix<CR>')
