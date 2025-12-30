@@ -1,7 +1,3 @@
--- local lspconfig = require('lspconfig'
-
-local M = {}
-
 -- Capabilities (cmp-nvim-lsp)
 local capabilities = require("cmp_nvim_lsp").default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
@@ -30,6 +26,8 @@ vim.lsp.config("*", {
 ---------------------------------------------------------------------
 
 vim.lsp.config("lua_ls", {
+  capabilities = capabilities,
+  on_attach = lsp_attach,
   filetypes = { "lua" },
   settings = {
     Lua = {
@@ -74,42 +72,23 @@ vim.lsp.config("pyright", {
   --   local fname = vim.api.nvim_buf_get_name(bufnr)
   --   return vim.fs.root(fname, { ".git", "pyproject.toml", "requirements_lock.txt", "WORKSPACE", "MODULE.bazel" })
   -- end,
-
-  -- before_init = function(_, config)
-  --   local root = config.root_dir
-  --   if root then
-  --     local py = root .. "/.venv/bin/python"
-  --     if vim.uv.fs_stat(py) then
-  --       config.settings = config.settings or {}
-  --       config.settings.python = config.settings.python or {}
-  --       config.settings.python.pythonPath = py
-  --       config.settings.python.venvPath = root
-  --       config.settings.python.venv = ".venv"
-  --     end
-  --   end
-  -- end,
-
+  capabilities = capabilities,
+  on_attach = lsp_attach,
   settings = {
       python = python_settings
   }
-  -- settings = {
-  --   python = {
-  --     analysis = {
-  --       typeCheckingMode = "basic",
-  --       autoSearchPaths = true,
-  --       diagnosticMode = "openFilesOnly",
-  --       useLibraryCodeForTypes = true,
-  --     },
-  --   },
-  -- },
 })
 
 vim.lsp.config("clangd", {
+  capabilities = capabilities,
+  on_attach = lsp_attach,
   -- extra clangd-specific settings can go here if you want
   filetypes = {"c"}
 })
 
 vim.lsp.config("gopls", {
+  capabilities = capabilities,
+  on_attach = lsp_attach,
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
   -- Equivalent to old root_pattern("go.work", "go.mod", ".git")
@@ -131,9 +110,4 @@ vim.lsp.config("gopls", {
 for _, server in ipairs({ "lua_ls", "pyright", "clangd", "gopls" }) do
   vim.lsp.enable(server)
 end
-
--- M.capabilities = capabilities
--- M.on_attach = lsp_attach
-
-return M
 
