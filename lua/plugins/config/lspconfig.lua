@@ -11,6 +11,7 @@ local function lsp_attach(client, buf)
   -- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { buffer = buf })
   vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf })
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = buf })
+  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = buf })
 end
 
 ---------------------------------------------------------------------
