@@ -83,8 +83,12 @@ vim.lsp.config("pyright", {
 vim.lsp.config("clangd", {
   capabilities = capabilities,
   on_attach = lsp_attach,
+  cmd = { "clangd", "--background-index", "--query-driver=/usr/bin/g++,/usr/bin/gcc" },
   -- extra clangd-specific settings can go here if you want
-  filetypes = {"c"}
+  init_options = {
+      fallbackFlags = { "-std=c++20" }
+  },
+  filetypes = {"c", "cpp"}
 })
 
 vim.lsp.config("gopls", {

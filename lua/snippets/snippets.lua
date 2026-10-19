@@ -9,6 +9,12 @@ local d = ls.dynamic_node
 local r = ls.restore_node
 
 
+ls.add_snippets("c++", {
+    s("bits", {
+        t({ '#include <bits/stdc++.h>'})
+    })
+})
+
 ls.add_snippets("c", {
         -- s("cso", {
         --         t({ '#include "cs136.h"',
@@ -87,7 +93,7 @@ local function generate_docstring(_, _, _)
   -- Insert nodes for types
   table.insert(nodes, t({"", name .. "("}))
   for idx, arg in ipairs(args) do
-    table.insert(nodes, i(idx + 2, "<" .. arg .. ">"))
+    table.insert(nodes, i(idx + 2, arg))
     if idx < #args then
       table.insert(nodes, t(", "))
     end
@@ -118,18 +124,6 @@ local function generate_docstring(_, _, _)
 end
 
 ls.add_snippets("python", {
-    s("header", {
-        t({ "##",
-        "## =======================================================",
-        "## CS 234 Spring 2025",
-        "## Assignment "}),i(1),t({", P"}),i(2),
-        t({'', ''}),
-        t({"## =======================================================",
-        "##"})
-    }, {
-        key = "python"
-    }),
-
     s("class", {
         t({"class "}),i(1, "className"), t({":"}),
         t({'', '\t"""'}),
